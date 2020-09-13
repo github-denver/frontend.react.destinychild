@@ -1,22 +1,60 @@
 import { combineReducers } from 'redux'
 import { all } from 'redux-saga/effects'
 
+import eventList, { eventListSaga } from './banner/event'
+import updateList, { updateListSaga } from './banner/update'
+import boardList, { boardListSaga } from './board/list'
+import boardRead, { boardReadSaga } from './board/read'
+import cardList, { cardListSaga } from './card/list'
+
+import childList, { childListSaga } from './child/list'
+import childRead, { childReadSaga } from './child/read'
+
+import guideList, { guideListSaga } from './guide/list'
+import guideRead, { guideReadSaga } from './guide/read'
+
+import heroList, { heroListSaga } from './hero/list'
+import mediaList, { mediaListSaga } from './media/list'
+import tabList, { tabListSaga } from './tab/list'
+import visualList, { visualListSaga } from './visual/list'
 import loading from './loading'
-
 import user, { userSaga } from './user'
-import hero, { heroSaga } from './hero/list'
-import tab, { tabSaga } from './tab/list'
-import update, { updateSaga } from './banner/update'
-import event, { eventSaga } from './banner/event'
-import card, { cardSaga } from './card/list'
-import list, { listSaga } from './board/list'
-import read, { readSaga } from './board/read'
-import media, { mediaSaga } from './media/list'
 
-const rootReducer = combineReducers({ loading, user, hero, tab, update, event, card, list, read, media })
+const rootReducer = combineReducers({
+  eventList,
+  updateList,
+  boardList,
+  boardRead,
+  cardList,
+  childList,
+  childRead,
+  guideList,
+  guideRead,
+  heroList,
+  mediaList,
+  tabList,
+  visualList,
+  loading,
+  user
+})
 
 export function* rootSaga() {
-  yield all([userSaga(), heroSaga(), tabSaga(), updateSaga(), eventSaga(), cardSaga(), listSaga(), readSaga(), mediaSaga()])
+  yield all([
+    eventListSaga(),
+    updateListSaga(),
+    boardListSaga(),
+    boardReadSaga(),
+    cardListSaga(),
+    childListSaga(),
+    childReadSaga(),
+    guideListSaga(),
+    guideReadSaga(),
+    heroListSaga(),
+    mediaListSaga(),
+    tabListSaga(),
+    visualListSaga(),
+    userSaga
+  ])
 }
 
 export default rootReducer

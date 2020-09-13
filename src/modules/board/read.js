@@ -3,14 +3,14 @@ import createRequestSaga, { createRequestActionTypes } from '../../lib/createReq
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/read'
 
-const [READ, READ_SUCCESS, READ_FAILURE] = createRequestActionTypes('board/READ')
+const [BOARD_READ, BOARD_READ_SUCCESS, BOARD_READ_FAILURE] = createRequestActionTypes('board/BOARD_READ')
+const BOARD_READ_INITIAL = 'board/BOARD_READ_INITIAL'
 
-export const read = createAction(READ, ({ category, number }) => ({ category, number }))
+export const boardRead = createAction(BOARD_READ, ({ category, number }) => ({ category, number }))
+export const boardReadInitial = createAction(BOARD_READ_INITIAL)
 
-// const readSaga = createRequestSaga(READ, api.read)
-
-export function* readSaga() {
-  yield takeLatest(READ, createRequestSaga(READ, api.read))
+export function* boardReadSaga() {
+  yield takeLatest(BOARD_READ, createRequestSaga(BOARD_READ, api.read))
 }
 
 const initialState = {
@@ -18,28 +18,34 @@ const initialState = {
   error: null
 }
 
-const board = handleActions(
+export default handleActions(
   {
-    [READ_SUCCESS]: (state, { payload: data }) => {
-      console.log('modules → board → [read.js] → [READ_SUCCESS] → data: ', data)
-      console.log('')
+    [BOARD_READ_SUCCESS]: (state, { payload: data }) => {
+      // console.log('modules → board → [read.js] → [BOARD_READ_SUCCESS] → data: ', data)
+      // console.log('')
 
       return {
         ...state,
         data
       }
     },
-    [READ_FAILURE]: (state, { payload: error }) => {
-      // console.log('modules → board → [read.js] → [READ_FAILURE] → error: ', error)
+    [BOARD_READ_FAILURE]: (state, { payload: error }) => {
+      // console.log('modules → board → [read.js] → [BOARD_READ_FAILURE] → error: ', error)
       // console.log('')
 
       return {
         ...state,
         error
       }
+    },
+    [BOARD_READ_INITIAL]: () => {
+      // console.log('modules → board → [read.js] → [BOARD_READ_INITIAL] → initialState: ', initialState)
+      // console.log('')
+
+      return {
+        ...initialState
+      }
     }
   },
   initialState
 )
-
-export default board

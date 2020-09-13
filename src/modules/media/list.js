@@ -3,11 +3,13 @@ import createRequestSaga, { createRequestActionTypes } from '../../lib/createReq
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/media'
 
-const [MEDIA, MEDIA_SUCCESS, MEDIA_FAILURE] = createRequestActionTypes('media/MEDIA')
+const [MEDIA, MEDIA_SUCCESS, MEDIA_FAILURE] = createRequestActionTypes('media/MEDIA_LIST')
+const MEDIA_LIST_INITIAL = 'media/MEDIA_LIST_INITIAL'
 
-export const list = createAction(MEDIA, ({ category, number }) => ({ category, number }))
+export const mediaList = createAction(MEDIA, ({ category, number }) => ({ category, number }))
+export const mediaListInitial = createAction(MEDIA_LIST_INITIAL)
 
-export function* mediaSaga() {
+export function* mediaListSaga() {
   yield takeLatest(MEDIA, createRequestSaga(MEDIA, api.list))
 }
 
@@ -16,7 +18,7 @@ const initialState = {
   error: null
 }
 
-const media = handleActions(
+export default handleActions(
   {
     [MEDIA_SUCCESS]: (state, { payload: data }) => {
       // console.log('modules → media → [list.js] → [MEDIA_SUCCESS] → data: ', data)
@@ -35,9 +37,15 @@ const media = handleActions(
         ...state,
         error
       }
+    },
+    [MEDIA_LIST_INITIAL]: () => {
+      // console.log('modules → media → [list.js] → [MEDIA_LIST_INITIAL] → initialState: ', initialState)
+      // console.log('')
+
+      return {
+        ...initialState
+      }
     }
   },
   initialState
 )
-
-export default media

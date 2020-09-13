@@ -3,13 +3,13 @@ import createRequestSaga, { createRequestActionTypes } from '../../lib/createReq
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/hero'
 
-const [HERO, HERO_SUCCESS, HERO_FAILURE] = createRequestActionTypes('hero/HERO')
+const [HERO, HERO_SUCCESS, HERO_FAILURE] = createRequestActionTypes('hero/HERO_LIST')
+const HERO_LIST_INITIAL = 'hero/HERO_LIST_INITIAL'
 
-export const list = createAction(HERO, ({ category, number }) => ({ category, number }))
+export const heroList = createAction(HERO, ({ category }) => ({ category }))
+export const heroListInitial = createAction(HERO_LIST_INITIAL)
 
-// const heroSaga = createRequestSaga(HERO, api.list)
-
-export function* heroSaga() {
+export function* heroListSaga() {
   yield takeLatest(HERO, createRequestSaga(HERO, api.list))
 }
 
@@ -18,7 +18,7 @@ const initialState = {
   error: null
 }
 
-const hero = handleActions(
+export default handleActions(
   {
     [HERO_SUCCESS]: (state, { payload: data }) => {
       // console.log('modules → hero → [list.js] → [HERO_SUCCESS] → data: ', data)
@@ -37,9 +37,15 @@ const hero = handleActions(
         ...state,
         error
       }
+    },
+    [HERO_LIST_INITIAL]: () => {
+      // console.log('modules → hero → [list.js] → [HERO_LIST_INITIAL] → initialState: ', initialState)
+      // console.log('')
+
+      return {
+        ...initialState
+      }
     }
   },
   initialState
 )
-
-export default hero

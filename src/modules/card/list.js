@@ -3,13 +3,13 @@ import createRequestSaga, { createRequestActionTypes } from '../../lib/createReq
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/card'
 
-const [CARD, CARD_SUCCESS, CARD_FAILURE] = createRequestActionTypes('card/CARD')
+const [CARD, CARD_SUCCESS, CARD_FAILURE] = createRequestActionTypes('card/CARD_LIST')
+const CARD_LIST_INITIAL = 'card/CARD_LIST_INITIAL'
 
-export const list = createAction(CARD, ({ category, number }) => ({ category, number }))
+export const cardList = createAction(CARD, ({ category, number }) => ({ category, number }))
+export const cardListInitial = createAction(CARD_LIST_INITIAL)
 
-// const cardSaga = createRequestSaga(CARD, api.list)
-
-export function* cardSaga() {
+export function* cardListSaga() {
   yield takeLatest(CARD, createRequestSaga(CARD, api.list))
 }
 
@@ -18,7 +18,7 @@ const initialState = {
   error: null
 }
 
-const card = handleActions(
+export default handleActions(
   {
     [CARD_SUCCESS]: (state, { payload: data }) => {
       // console.log('modules → card → [list.js] → [CARD_SUCCESS] → data: ', data)
@@ -37,9 +37,15 @@ const card = handleActions(
         ...state,
         error
       }
+    },
+    [CARD_LIST_INITIAL]: () => {
+      // console.log('modules → card → [list.js] → [CARD_LIST_INITIAL] → initialState: ', initialState)
+      // console.log('')
+
+      return {
+        ...initialState
+      }
     }
   },
   initialState
 )
-
-export default card

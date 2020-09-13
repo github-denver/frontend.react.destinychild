@@ -2,6 +2,7 @@
 ---------- ---------- ---------- ---------- ---------- */
 @font-face {
   font-family: 'Roboto-Thin';
+  font-style: normal;
   font-weight: 100;
   src: url(/fonts/roboto/Roboto-Thin.eot);
   src: url(/fonts/roboto/Roboto-Thin.eot?#iefix) format('embedded-opentype');
@@ -10,6 +11,7 @@
 
 @font-face {
   font-family: 'Roboto-Light';
+  font-style: normal;
   font-weight: 300;
   src: url(/fonts/roboto/Roboto-Light.eot);
   src: url(/fonts/roboto/Roboto-Light.eot?#iefix) format('embedded-opentype');
@@ -18,6 +20,7 @@
 
 @font-face {
   font-family: 'Roboto-Regular';
+  font-style: normal;
   font-weight: 400;
   src: url(/fonts/roboto/Roboto-Regular.eot);
   src: url(/fonts/roboto/Roboto-Regular.eot?#iefix) format('embedded-opentype');
@@ -26,6 +29,7 @@
 
 @font-face {
   font-family: 'Roboto-Medium';
+  font-style: normal;
   font-weight: 500;
   src: url(/fonts/roboto/Roboto-Medium.eot);
   src: url(/fonts/roboto/Roboto-Medium.eot?#iefix) format('embedded-opentype');
@@ -34,6 +38,7 @@
 
 @font-face {
   font-family: 'Roboto-Bold';
+  font-style: normal;
   font-weight: 700;
   src: url(/fonts/roboto/Roboto-Bold.eot);
   src: url(/fonts/roboto/Roboto-Bold.eot?#iefix) format('embedded-opentype');
@@ -42,6 +47,7 @@
 
 @font-face {
   font-family: 'Roboto-Black';
+  font-style: normal;
   font-weight: 900;
   src: url(/fonts/roboto/Roboto-Black.eot);
   src: url(/fonts/roboto/Roboto-Black.eot?#iefix) format('embedded-opentype');
@@ -50,6 +56,7 @@
 
 @font-face {
   font-family: 'Roboto-Black';
+  font-style: normal;
   font-weight: 900;
   src: url(/fonts/roboto/Roboto-Black.eot);
   src: url(/fonts/roboto/Roboto-Black.eot?#iefix) format('embedded-opentype');
@@ -58,6 +65,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-Thin-Hestia';
+  font-style: normal;
   font-weight: 100;
   src: url(/fonts/NotoSansKR/NotoSansKR-Thin-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Thin-Hestia.eot?#iefix) format('embedded-opentype');
@@ -66,6 +74,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-Light-Hestia';
+  font-style: normal;
   font-weight: 300;
   src: url(/fonts/NotoSansKR/NotoSansKR-Light-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Light-Hestia.eot?#iefix) format('embedded-opentype');
@@ -74,6 +83,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-DemiLight-Hestia';
+  font-style: normal;
   font-weight: 350;
   src: url(/fonts/NotoSansKR/NotoSansKR-DemiLight-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-DemiLight-Hestia.eot?#iefix) format('embedded-opentype');
@@ -82,6 +92,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-Regular-Hestia';
+  font-style: normal;
   font-weight: 400;
   src: url(/fonts/NotoSansKR/NotoSansKR-Regular-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Regular-Hestia.eot?#iefix) format('embedded-opentype');
@@ -90,6 +101,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-Medium-Hestia';
+  font-style: normal;
   font-weight: 500;
   src: url(/fonts/NotoSansKR/NotoSansKR-Medium-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Medium-Hestia.eot?#iefix) format('embedded-opentype');
@@ -98,6 +110,7 @@
 
 @font-face {
   font-family: 'NotoSansKR-Bold-Hestia';
+  font-style: normal;
   font-weight: 700;
   src: url(/fonts/NotoSansKR/NotoSansKR-Bold-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Bold-Hestia.eot?#iefix) format('embedded-opentype');
@@ -106,10 +119,46 @@
 
 @font-face {
   font-family: 'NotoSansKR-Black-Hestia';
+  font-style: normal;
   font-weight: 900;
   src: url(/fonts/NotoSansKR/NotoSansKR-Black-Hestia.eot);
   src: url(/fonts/NotoSansKR/NotoSansKR-Black-Hestia.eot?#iefix) format('embedded-opentype');
   src: url(/fonts/NotoSansKR/NotoSansKR-Black-Hestia.woff) format('woff'), url(/fonts/NotoSansKR/NotoSansKR-Black-Hestia.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumGothicLight';
+  font-style: normal;
+  src: url(/fonts/NanumGothic/NanumGothicLight.eot);
+  src: url(/fonts/NanumGothic/NanumGothicLight.eot?#iefix) format('embedded-opentype');
+  src: url(/fonts/NanumGothic/NanumGothicLight.woff) format('woff'), url(/fonts/NanumGothic/NanumGothicLight.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/NanumGothic/NanumGothic.eot);
+  src: url(/fonts/NanumGothic/NanumGothic.eot?#iefix) format('embedded-opentype');
+  src: url(/fonts/NanumGothic/NanumGothic.woff) format('woff'), url(/fonts/NanumGothic/NanumGothic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumGothicBold';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/fonts/NanumGothic/NanumGothicBold.eot);
+  src: url(/fonts/NanumGothic/NanumGothicBold.eot?#iefix) format('embedded-opentype');
+  src: url(/fonts/NanumGothic/NanumGothicBold.woff) format('woff'), url(/fonts/NanumGothic/NanumGothicBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumGothicExtraBold';
+  font-style: normal;
+  font-weight: 800;
+  src: url(/fonts/NanumGothic/NanumGothicExtraBold.eot);
+  src: url(/fonts/NanumGothic/NanumGothicExtraBold.eot?#iefix) format('embedded-opentype');
+  src: url(/fonts/NanumGothic/NanumGothicExtraBold.woff) format('woff'), url(/fonts/NanumGothic/NanumGothicExtraBold.ttf) format('truetype');
 }
 
 /* reset
