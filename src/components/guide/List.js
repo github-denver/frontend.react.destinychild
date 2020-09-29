@@ -4,53 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Styled = {}
 
-Styled.list = styled.ul`
-  font-size: 0;
-  margin: -24px 0 0 -24px;
-
-  & > li {
-    display: inline-block;
-    width: 260.8px;
-    padding: 24px 0 0 24px;
-    box-sizing: border-box;
-    vertical-align: top;
-  }
-
-  .title_guide {
-    display: block;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-top: 1px solid #000;
-    font-family: 'NotoSansKR-Regular-Hestia';
-    font-weight: 400;
-    font-size: 16px;
-    background-color: #eeeff4;
-    text-align: center;
-  }
-
-  .list_common {
-    min-height: 360px;
-    margin-top: -1px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-
-  .list_common li + li {
-    margin-top: 12px;
-  }
-
-  .link_guide {
-    display: inline-block;
-    padding: 0 12px;
-    font-family: 'NotoSansKR-DemiLight-Hestia';
-    font-weight: 350;
-    font-size: 14px;
-    text-align: left;
-  }
-`
+Styled.list = styled.div``
 
 const List = (props) => {
   return (
@@ -71,7 +25,7 @@ const List = (props) => {
           <ul className="list_common">
             <li>
               <Link to="/beluga/dictionary/detail/2" className="link_guide" target="_blank">
-                게임 설정
+                게임 설정 화면
               </Link>
             </li>
           </ul>
@@ -246,4 +200,4 @@ const List = (props) => {
   )
 }
 
-export default React.memo(List)
+export default List

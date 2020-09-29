@@ -11,20 +11,12 @@ const initialState = {}
 const loading = handleActions(
   {
     [LOADING_START]: (state, action) => {
-      // console.log('modules → [loading.js] → state: ', state)
-      // console.log('modules → [loading.js] → action: ', action)
-      // console.log('')
-
       return {
         ...state,
         [action.payload]: true
       }
     },
     [LOADING_FINISH]: (state, action) => {
-      // console.log('modules → [loading.js] → state: ', state)
-      // console.log('modules → [loading.js] → action: ', action)
-      // console.log('')
-
       return {
         ...state,
         [action.payload]: false

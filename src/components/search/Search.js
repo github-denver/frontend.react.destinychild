@@ -1,97 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Select from '../Select'
 import Field from '../Field'
+import { Link } from 'react-router-dom'
 
 const Styled = {}
 
-Styled.search = styled.div`
-  display: inline-block;
-  font-size: 0;
-  vertical-align: top;
-
-  .group_field {
-    z-index: 1;
-    margin: 0 -1px;
-  }
-
-  .box_field {
-    min-width: 240px;
-  }
-
-  /*
-  .group_search .select_global {
-  width: 30%;
-  vertical-align: top;
-  }
-
-  .group_search .link_global {
-  margin-top: 10px;
-  }
-
-  .group_search .group_field {
-  width: 70%;
-  padding-left: 10px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  vertical-align: top;
-  }
-  */
-
-  /* group_field
-  ---------- ---------- ---------- ---------- ---------- */
-  .group_field {
-    display: inline-block;
-    position: relative;
-    vertical-align: top;
-  }
-
-  .group_field .label_field {
-    font-size: 14px;
-  }
-
-  .group_field .field_local[type='file'] {
-    height: auto;
-  }
-
-  /* box_field
-  ---------- ---------- ---------- ---------- ---------- */
-  .box_field {
-    display: inline-block;
-    min-width: 120px;
-    border: 1px solid #e9e9e9;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .box_field .field_local {
-    width: 100%;
-    height: 46px;
-    padding: 10px;
-    border: 0 none;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 14px;
-    text-align: left;
-  }
-`
+Styled.search = styled.div``
 
 const Search = (props) => {
-  // const { attribute } = props
+  const { attribute } = props
+
+  const [select, setSelect] = useState('subject')
+  const [keyword, setKeyword] = useState('')
+
+  const onChange = (event) => {
+    if (event.target.tagName.toLowerCase() === 'select') {
+      setSelect(event.target.options[event.target.selectedIndex].value)
+    }
+
+    if (event.target.tagName.toLowerCase() === 'input') {
+      setKeyword(event.target.value)
+    }
+  }
 
   return (
     <>
       <Styled.search className="group_search">
-        <Select />
+        <Select attribute={{ select: attribute.select, keyword: keyword }} onChange={onChange} />
 
-        <Field />
+        <Field attribute={{ select: attribute.select, keyword: keyword }} onChange={onChange} />
 
-        <a href="/gallery/category/list/1?select=subject&amp;keyword=" className="button_global button_default" role="button">
+        <Link to={`/beluga/${attribute.category}/list/1?select=${select}&keyword=${keyword}`} className="button_global button_default" role="button">
           검색
-        </a>
+        </Link>
       </Styled.search>
     </>
   )
 }
 
-export default React.memo(Search)
+export default Search

@@ -2,166 +2,135 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import moment from 'moment'
+import 'moment/locale/ko'
+moment.locale('ko')
+
 const Styled = {}
 
-Styled.read = styled.div`
-  border-top: 2px solid #000;
+Styled.read = styled.div``
 
-  /* read_header
-  ---------- ---------- ---------- ---------- ---------- */
-  .read_header .title_local {
-    display: block;
-    padding: 16px 24px;
-    font-family: 'NotoSansKR-Light-Hestia';
-    font-weight: 300;
-    font-size: 18px;
-  }
+const Loading = () => {
+  return (
+    <Styled.read className="group_read loading">
+      <div className="read_header">
+        <strong className="title_subject">
+          <span className="group_profile"></span>
+          <span className="text_subject">
+            <span className="text_local"></span>
+          </span>
+        </strong>
 
-  .read_header .text_read {
-    margin-left: 24px;
-    vertical-align: middle;
-  }
+        <div className="information_read">
+          <div className="group_half">
+            <span className="text_local"></span>
+          </div>
+        </div>
+      </div>
 
-  /* read_contents
-  ---------- ---------- ---------- ---------- ---------- */
-  .read_contents {
-    padding: 16px 24px;
-    min-height: 320px;
-    border-top: 1px solid #e9e9e9;
-    box-sizing: border-box;
-    font-size: medium;
-  }
+      <div className="read_contents">
+        <span className="text_local"></span>
+      </div>
 
-  .read_contents img {
-    max-width: 100%;
-  }
+      <div className="read_footer">
+        <div className="group_button group_half">
+          <div className="inner_half">
+            <span className="button_global button_default"></span>
+          </div>
 
-  /* read_footer
-  ---------- ---------- ---------- ---------- ---------- */
-  .read_footer {
-    border-top: 1px solid #e9e9e9;
-  }
-
-  .read_footer .group_button {
-    margin-top: 24px;
-  }
-
-  /* information_read
-  ---------- ---------- ---------- ---------- ---------- */
-  .information_read {
-    padding: 16px 24px;
-    border-top: 1px solid #e9e9e9;
-  }
-
-  .information_read .text_read {
-    font-family: 'NotoSansKR-Light-Hestia';
-    font-size: 14px;
-  }
-
-  .information_read .inner_half {
-    text-align: right;
-  }
-
-  .information_read .inner_half .text_read {
-    margin-left: 24px;
-  }
-
-  .information_read .inner_half .text_read:first-child {
-    margin-left: 0;
-  }
-
-  .information_read .inner_half:first-child {
-    text-align: left;
-  }
-
-  .information_read .inner_half:first-child .text_read {
-    margin-left: 0;
-  }
-`
+          <div className="inner_half">
+            <span className="button_global button_default"></span>
+            <span className="button_global button_default"></span>
+          </div>
+        </div>
+      </div>
+    </Styled.read>
+  )
+}
 
 const Read = (props) => {
   const { category, read, error, loading } = props
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      // console.group('components → board → [Read.js]')
-      // console.log('존재하지 않는 데이터입니다.')
-      // console.groupEnd()
+      console.group('components → board → [Read.js]')
+      console.log('존재하지 않는 데이터입니다.')
+      console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    // console.group('components → board → [Read.js]')
-    // console.log('에러가 발생했어요!')
-    // console.groupEnd()
+    console.group('components → board → [Read.js]')
+    console.log('에러가 발생했어요!')
+    console.groupEnd()
 
     return <p>에러가 발생했어요!</p>
   }
 
   if (loading || !read) {
-    // console.group('components → board → [Read.js]')
-    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    // console.groupEnd()
+    console.group('components → board → [Read.js]')
+    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    console.groupEnd()
 
-    return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
+    return <Loading />
   }
 
   if (!read) {
-    // console.group('components → board → [Read.js]')
-    // console.log('목록이 존재하지 않습니다.')
-    // console.groupEnd()
+    console.group('components → board → [Read.js]')
+    console.log('목록이 존재하지 않습니다.')
+    console.groupEnd()
 
     return <p>목록이 존재하지 않습니다.</p>
   }
 
+  const regdate = moment(read.regdate).format('YYYY-MM-DD')
+
   return (
-    <>
-      <Styled.read className="group_read">
-        <div className="read_header">
-          <strong className="title_local">
-            <span
-              className="group_profile"
-              attribute={{ picture: read.picture }}
-              style={{ backgroundImage: `url(http://localhost:4000/uploads/${read.picture})` }}></span>
-            <span className="text_read">{read.subject}</span>
-          </strong>
+    <Styled.read className="group_read">
+      <div className="read_header">
+        <strong className="title_subject">
+          <span
+            className="group_profile"
+            attribute={{ picture: read.picture }}
+            style={{ backgroundImage: `url(http://localhost:4000/uploads/${read.picture})` }}></span>
+          <span className="text_subject">{read.subject}</span>
+        </strong>
 
-          <div className="information_read">
-            <div className="group_half">
-              <div className="inner_half">
-                <span className="text_read text_write">{read.name}</span>
-              </div>
+        <div className="information_read">
+          <div className="group_half">
+            <div className="inner_half">
+              <span className="text_read text_write">{read.name}</span>
+            </div>
 
-              <div className="inner_half">
-                <span className="text_read text_date">{read.regdate}</span>
-                <span className="text_read text_count">{read.count}</span>
-              </div>
+            <div className="inner_half">
+              <span className="text_read text_date">{regdate}</span>
+              <span className="text_read text_count">{read.count}</span>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="read_contents" dangerouslySetInnerHTML={{ __html: read.content }}></div>
+      <div className="read_contents" dangerouslySetInnerHTML={{ __html: read.content }}></div>
 
-        <div className="read_footer">
-          <div className="group_button group_half">
-            <div className="inner_half">
-              <Link to={`/beluga/${category}/list/1`} className="button_global button_default" role="button">
-                목록
-              </Link>
-            </div>
-            <div className="inner_half">
-              <Link to="/" className="button_global button_default" role="button">
-                수정
-              </Link>
-              <button type="submit" className="button_global button_default">
-                삭제
-              </button>
-            </div>
+      <div className="read_footer">
+        <div className="group_button group_half">
+          <div className="inner_half">
+            <Link to={`/beluga/${category}/list/1`} className="button_global button_default" role="button">
+              목록
+            </Link>
+          </div>
+          <div className="inner_half">
+            <Link to="/" className="button_global button_default" role="button">
+              수정
+            </Link>
+            <button type="submit" className="button_global button_default">
+              삭제
+            </button>
           </div>
         </div>
-      </Styled.read>
-    </>
+      </div>
+    </Styled.read>
   )
 }
 
-export default React.memo(Read)
+export default Read

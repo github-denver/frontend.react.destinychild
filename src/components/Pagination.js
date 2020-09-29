@@ -4,30 +4,9 @@ import { Link } from 'react-router-dom'
 
 const Styled = {}
 
-Styled.pagination = styled.div`
-  display: inline-block;
-  font-size: 0;
-  vertical-align: top;
-
-  &.current {
-    border-color: #000;
-    font-family: 'NotoSansKR-Regular-Hestia';
-  }
-
-  .link_pagination {
-    display: inline-block;
-    padding: 4px 12px;
-    border: 1px solid transparent;
-    font-family: 'NotoSansKR-Light-Hestia';
-    font-size: 14px;
-    background-color: #fff;
-    vertical-align: middle;
-  }
-`
+Styled.pagination = styled.div``
 
 const queryString = ({ service, number }) => {
-  // const query = qs.stringify({ tag, page })
-
   return `/${service}/list/${number}`
 }
 
@@ -51,7 +30,7 @@ const Pagination = (props) => {
           <Link disabled={pagination.current === 1} to={pagination.current === 1 ? '/' : queryString({ service: 'notice', number: pagination.current - 1 })}>
             이전
           </Link>
-          <ul>
+          <ul className="list_pagination">
             <li>{list}</li>
           </ul>
           <Link
@@ -65,4 +44,4 @@ const Pagination = (props) => {
   )
 }
 
-export default React.memo(Pagination)
+export default Pagination

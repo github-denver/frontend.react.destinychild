@@ -21,27 +21,18 @@ const initialState = {
 export default handleActions(
   {
     [BOARD_READ_SUCCESS]: (state, { payload: data }) => {
-      // console.log('modules → board → [read.js] → [BOARD_READ_SUCCESS] → data: ', data)
-      // console.log('')
-
       return {
         ...state,
         data
       }
     },
     [BOARD_READ_FAILURE]: (state, { payload: error }) => {
-      // console.log('modules → board → [read.js] → [BOARD_READ_FAILURE] → error: ', error)
-      // console.log('')
-
       return {
         ...state,
         error
       }
     },
     [BOARD_READ_INITIAL]: () => {
-      // console.log('modules → board → [read.js] → [BOARD_READ_INITIAL] → initialState: ', initialState)
-      // console.log('')
-
       return {
         ...initialState
       }

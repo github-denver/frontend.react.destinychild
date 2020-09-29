@@ -3,55 +3,39 @@ import styled from 'styled-components'
 
 const Styled = {}
 
-Styled.hgroup = styled.div`
-  margin-bottom: 24px;
+Styled.hgroup = styled.div``
 
-  .title_hgroup {
-    display: inline-block;
-    font-family: 'NotoSansKR-Medium-Hestia';
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 1;
+const func = (category, navigation) => {
+  let result = []
+
+  for (let i in navigation) {
+    if (navigation[i].category === category) {
+      result = navigation[i].text
+
+      break
+    }
   }
 
-  .inner_half {
-    text-align: right;
-    vertical-align: bottom;
-  }
+  return result
+}
 
-  .inner_half:first-child {
-    text-align: left;
-  }
+const Hgroup = ({ attribute }) => {
+  const { title, category, navigation } = attribute
 
-  /* group_location
-  ---------- ---------- ---------- ---------- ---------- */
-  .group_location {
-    display: inline-block;
-    font-size: 0;
-  }
-
-  .group_location .text_location {
-    display: inline-block;
-    font-size: 14px;
-    line-height: 1;
-  }
-`
-
-const Hgroup = (props) => {
-  const { attribute } = props
+  const result = func(category, navigation)
 
   return (
     <>
       <Styled.hgroup className="hgroup_global">
         <div className="group_half">
           <div className="inner_half">
-            <h3 className="title_hgroup">{attribute.title}</h3>
+            <h3 className="title_hgroup">{title ? title : result}</h3>
           </div>
           <div className="inner_half">
             {attribute.location && (
               <div className="group_location">
-                <span className="text_location">{attribute.title}</span>
-                <span className="text_location">{attribute.title}</span>
+                <span className="text_location"></span>
+                <span className="text_location"></span>
               </div>
             )}
           </div>
@@ -61,4 +45,4 @@ const Hgroup = (props) => {
   )
 }
 
-export default React.memo(Hgroup)
+export default Hgroup

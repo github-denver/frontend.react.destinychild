@@ -14,8 +14,8 @@ import { createStore, compose, applyMiddleware } from 'redux'
 // import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer, { rootSaga } from './modules'
 import createSagaMiddleware from 'redux-saga'
-// import { tempSetUser, check } from './modules/user'
-// import Cookies from 'js-cookie'
+import { tempSetUser, check } from './modules/user'
+import Cookies from 'js-cookie'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -37,7 +37,7 @@ const enhancer = composeEnhancers(
 // const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 const store = createStore(rootReducer, enhancer)
 
-/* function user() {
+function user() {
   try {
     const user = localStorage.getItem('user')
     // console.log('[index.js] → user: ', user)
@@ -45,15 +45,14 @@ const store = createStore(rootReducer, enhancer)
 
     const token = Cookies.get('accessToken')
     // console.log('[index.js] → token: ', token)
-    // console.log('[index.js] → !token: ', !token)
-    // console.log("[index.js] → typeof token !== 'undefined': ", typeof token !== 'undefined')
     // console.log('')
 
-    // if (!token) return
+    // console.log("[index.js] → typeof token === 'undefined': ", typeof token === 'undefined')
+    // console.log('')
     if (typeof token === 'undefined') return
 
-    // console.log('[index.js] → tempSetUser(user) 실행합니다.')
-    // console.log('[index.js] → check(token) 실행합니다.')
+    // console.log('[index.js] → tempSetUser(user)를 실행합니다.')
+    // console.log('[index.js] → check(token)를 실행합니다.')
     // console.log('')
 
     store.dispatch(tempSetUser(user))
@@ -61,11 +60,11 @@ const store = createStore(rootReducer, enhancer)
   } catch (error) {
     console.error(error)
   }
-} */
+}
 
 sagaMiddleware.run(rootSaga)
 
-/* user() */
+user()
 
 ReactDOM.render(
   <Provider store={store}>

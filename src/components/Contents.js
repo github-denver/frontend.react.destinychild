@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Styled = {}
 
-Styled.contents = styled.section``
+Styled.contents = styled.div``
 
 const Contents = (props) => {
   const { attribute } = props
@@ -26,4 +26,4 @@ const Contents = (props) => {
   )
 }
 
-export default React.memo(Contents)
+export default Contents

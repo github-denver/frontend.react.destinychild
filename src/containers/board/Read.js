@@ -5,7 +5,7 @@ import { boardRead, boardReadInitial } from '../../modules/board/read'
 import { withRouter } from 'react-router-dom'
 
 const Result = (props) => {
-  const { location, attribute } = props
+  const { attribute } = props
 
   const { read, error, loading } = useSelector(({ boardRead, loading }) => {
     const temp = {}
@@ -24,7 +24,9 @@ const Result = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const number = location.pathname.split('/').splice(-1)[0]
+    // const number = attribute.location.pathname.split('/').splice(-1)[0]
+
+    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
 
     dispatch(boardRead({ category: attribute.category, number }))
 
@@ -33,7 +35,7 @@ const Result = (props) => {
 
       dispatch(boardReadInitial())
     }
-  }, [dispatch, location.pathname, attribute.category])
+  }, [dispatch, attribute.category, attribute.location.pathname])
 
   return <Read category={attribute.category} read={read} error={error} loading={loading} />
 }

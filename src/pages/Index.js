@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../containers/header/Header'
+import Header from '../containers/common/header/Header'
 import Hero from '../containers/slick/Hero'
 import Hgroup from '../components/Hgroup'
 import Update from '../containers/banner/Update'
@@ -9,7 +9,7 @@ import Card from '../containers/card/List'
 import Media from '../containers/media/Media'
 import Footer from '../components/Footer'
 
-const Index = () => {
+const Result = ({ location }) => {
   return (
     <>
       <Header />
@@ -48,9 +48,9 @@ const Index = () => {
         {/* <div className="outer_contents"> */}
         <div className="contents">
           <div className="inner_global">
-            <Hgroup attribute={{ title: '가이드' }} />
+            <Hgroup attribute={{ title: '게임 가이드' }} />
 
-            <Card attribute={{ category: 'guide' }} />
+            <Card attribute={{ category: 'guide', location: location }} />
           </div>
         </div>
         {/* </div> */}
@@ -77,4 +77,4 @@ const Index = () => {
   )
 }
 
-export default React.memo(Index)
+export default Result

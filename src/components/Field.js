@@ -3,20 +3,42 @@ import styled from 'styled-components'
 
 const Styled = {}
 
-Styled.select = styled.span``
+Styled.field = styled.div``
 
-const Field = (props) => {
-  // const { attribute } = props
+const Part = (props) => {
+  const { attribute, onChange } = props
 
   return (
-    <>
-      <span className="group_field">
-        <span className="box_field" style={{ width: 300 }}>
-          <input type="search" name="keyword" id="keyword" className="field_local" />
-        </span>
-      </span>
-    </>
+    <span className="box_field">
+      <input
+        type={attribute && attribute.type ? attribute.type : 'text'}
+        name={attribute && attribute.name ? attribute.name : 'name'}
+        id={attribute && attribute.name ? attribute.name : 'id'}
+        className="field_local"
+        onChange={onChange}
+      />
+    </span>
   )
 }
 
-export default React.memo(Field)
+const Field = (props) => {
+  const { attribute, onChange } = props
+
+  return (
+    <Styled.field className="group_field">
+      {attribute && attribute.label ? (
+        <>
+          <label htmlFor="keyword" className="label_field">
+            {attribute.label}
+          </label>
+
+          <Part attribute={attribute} onChange={onChange} />
+        </>
+      ) : (
+        <Part attribute={attribute} onChange={onChange} />
+      )}
+    </Styled.field>
+  )
+}
+
+export default Field

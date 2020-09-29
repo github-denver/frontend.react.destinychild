@@ -170,8 +170,10 @@
 
 html,
 body {
-  font-family: 'NotoSansKR-Regular-Hestia', 'Roboto-Regular', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', 'Segoe UI',
-    'Roboto', 'Helvetica Neue', 'Arial, Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  /* font-family: 'NotoSansKR-Regular-Hestia', 'Roboto-Regular', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', 'Segoe UI',
+    'Roboto', 'Helvetica Neue', 'Arial, Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', 'Segoe UI', 'Roboto', 'Helvetica Neue',
+    'Arial, Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: #000;
@@ -289,7 +291,8 @@ a {
   display: inline-block;
   border: 0 none;
   box-sizing: border-box;
-  font-family: 'NotoSansKR-Regular-Hestia';
+  /* font-family: 'NotoSansKR-Regular-Hestia'; */
+  font-weight: bold;
   font-size: 14px;
   line-height: 1;
   background-color: transparent;
@@ -304,52 +307,14 @@ a {
   background-color: #f1f1f1;
 }
 
+.button_small {
+  min-width: 60px;
+  padding: 6px 12px;
+  border: 1px solid #e9e9e9;
+  /* font-family: 'NotoSansKR-Regular-Hestia' !important; */
+  font-size: 12px;
+  background-color: #f1f1f1;
+}
+
 /* link
 ---------- ---------- ---------- ---------- ---------- */
-.link_global {
-}
-
-.link_default {
-}
-
-/*
-.button_global {
-  display: inline-block;
-  padding: 12px 12px;
-  border: 1px solid #e9e9e9;
-  box-sizing: border-box;
-  font-weight: bold;
-  font-size: 14px;
-  vertical-align: top;
-  line-height: 1;
-}
-
-.button_utility .icon_global {
-  width: 30px;
-  height: 30px;
-}
-
-.button_profile .icon_global {
-  background-position: -35px 0;
-}
-
-.button_login .icon_global {
-  background-position: -70px 0;
-}
-
-.button_logout .icon_global {
-  background-position: -105px 0;
-}
-
-.button_register .icon_global {
-  background-position: -105px -35px;
-}
-
-.button_hamburger .icon_global {
-  background-position: 0 0;
-}
-
-.button_close .icon_global {
-  background-position: -35px -35px;
-}
-*/

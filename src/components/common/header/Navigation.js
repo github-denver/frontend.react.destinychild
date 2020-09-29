@@ -4,68 +4,9 @@ import { Link } from 'react-router-dom'
 
 const Styled = {}
 
-Styled.navigation = styled.nav`
-  /* list_gnb
-  ---------- ---------- ---------- ---------- ---------- */
-  .list_gnb {
-    display: inline-block;
-    font-size: 0;
-    vertical-align: top;
-  }
-
-  .list_gnb > li {
-    display: inline-block;
-    position: relative;
-    padding: 12px 0;
-    vertical-align: top;
-  }
-
-  .list_gnb .link_gnb {
-    display: block;
-    min-width: 160px;
-    padding: 12px 24px;
-    box-sizing: border-box;
-    font-size: 18px;
-    color: #fff;
-    text-align: center;
-  }
-
-  /* list_lnb
-  ---------- ---------- ---------- ---------- ---------- */
-  .list_lnb {
-    position: absolute;
-    top: 75px;
-    right: 0;
-    left: 0;
-    z-index: 1;
-    font-size: 0;
-  }
-
-  .list_lnb li {
-    display: block;
-  }
-
-  .list_lnb li + li {
-    margin-top: 6px;
-  }
-
-  .list_lnb .link_lnb {
-    display: block;
-    padding: 6px 24px;
-    font-family: 'NotoSansKR-Light-Hestia';
-    font-size: 14px;
-    color: #fff;
-    text-align: center;
-  }
-`
+Styled.navigation = styled.nav``
 
 const Navigation = ({ attribute }) => {
-  // const { user, visible, event } = attribute
-  // console.log('components → common → header → [Navigation.js] → user: ', user)
-  // console.log('components → common → header → [Navigation.js] → visible: ', visible)
-  // console.log('components → common → header → [Navigation.js] → event: ', event)
-  // console.log('')
-
   useEffect(() => {
     const header = document.querySelector('.header')
 
@@ -188,4 +129,4 @@ const Navigation = ({ attribute }) => {
   )
 }
 
-export default React.memo(Navigation)
+export default Navigation

@@ -4,89 +4,75 @@ import Pagination from '../../components/Pagination'
 import Search from '../../components/search/Search'
 import { Link } from 'react-router-dom'
 
+import moment from 'moment'
+import 'moment/locale/ko'
+moment.locale('ko')
+
 const Styled = {}
 
-Styled.list = styled.ul`
-  border-top: 2px solid #000;
-  border-bottom: 1px solid #e9e9e9;
-  font-size: 0;
+Styled.list = styled.div``
 
-  li {
-    padding: 16px 0;
-    font-family: 'NotoSansKR-Light-Hestia';
-    font-size: 14px;
-    text-align: center;
-  }
+const Loading = () => {
+  return (
+    <Styled.list className="list_board loading">
+      {[...Array(10)].map((currentValue, index) => {
+        return (
+          <li key={index}>
+            <span className="text_board text_number">
+              <span className="text_local clean"></span>
+            </span>
+            <span className="text_board text_subject">
+              <span className="group_profile"></span>
 
-  li + li {
-    border-top: 1px solid #e9e9e9;
-  }
-
-  .text_board {
-    display: inline-block;
-    width: 12%;
-    box-sizing: border-box;
-    vertical-align: middle;
-  }
-
-  .text_number {
-    width: 6%;
-  }
-
-  .text_subject {
-    width: 64%;
-    padding: 0 24px;
-    box-sizing: border-box;
-    text-align: left;
-  }
-
-  .link_subject {
-    display: inline-block;
-    font-size: 18px;
-    vertical-align: middle;
-  }
-
-  .text_write {
-    width: 12%;
-    text-align: left;
-  }
-
-  .text_count {
-    width: 6%;
-  }
-`
+              <span className="link_subject"></span>
+            </span>
+            <span className="text_board text_write">
+              <span className="text_local clean"></span>
+            </span>
+            <span className="text_board text_count">
+              <span className="text_local"></span>
+            </span>
+            <span className="text_board">
+              <span className="text_local"></span>
+            </span>
+          </li>
+        )
+      })}
+    </Styled.list>
+  )
+}
 
 const List = (props) => {
-  const { category, list, pagination, error, loading } = props
+  const { select, keyword, category, list, pagination, error, loading } = props
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      // console.group('components → board → [List.js]')
-      // console.log('존재하지 않는 데이터입니다.')
-      // console.groupEnd()
+      console.group('components → board → [List.js]')
+      console.log('존재하지 않는 데이터입니다.')
+      console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    // console.group('components → board → [List.js]')
-    // console.log('에러가 발생했어요!')
-    // console.groupEnd()
+    console.group('components → board → [List.js]')
+    console.log('에러가 발생했어요!')
+    console.groupEnd()
 
     return <p>에러가 발생했어요!</p>
   }
 
   if (loading || !list) {
-    // console.group('components → board → [List.js]')
-    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    // console.groupEnd()
+    console.group('components → board → [List.js]')
+    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    console.groupEnd()
 
-    return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
+    return <Loading />
   }
 
   if (!list) {
-    // console.group('components → board → [List.js]')
-    // console.log('목록이 존재하지 않습니다.')
-    // console.groupEnd()
+    console.group('components → board → [List.js]')
+    console.log('목록이 존재하지 않습니다.')
+    console.groupEnd()
 
     return <p>목록이 존재하지 않습니다.</p>
   }
@@ -95,6 +81,8 @@ const List = (props) => {
     <>
       <Styled.list className="list_board">
         {list.map((currentValue, index) => {
+          const regdate = moment(currentValue.regdate).format('YYYY-MM-DD')
+
           return (
             <li key={currentValue.number}>
               <span className="text_board text_number">{currentValue.number}</span>
@@ -110,17 +98,30 @@ const List = (props) => {
               </span>
               <span className="text_board text_write">{currentValue.name}</span>
               <span className="text_board text_count">{currentValue.count}</span>
-              <span className="text_board">{currentValue.regdate}</span>
+              <span className="text_board">{regdate}</span>
             </li>
           )
         })}
       </Styled.list>
 
-      <Pagination pagination={pagination} />
+      <div className="group_button group_half">
+        <div className="inner_half"></div>
+        <div className="inner_half">
+          <Link to={`/beluga/${category}/write`} className="button_global button_default" role="button">
+            등록
+          </Link>
+        </div>
+      </div>
 
-      {list.length !== 0 && <Search />}
+      {list.length !== 0 && (
+        <>
+          <Pagination pagination={pagination} />
+
+          <Search attribute={{ category: category, select: select, keyword: keyword }} />
+        </>
+      )}
     </>
   )
 }
 
-export default React.memo(List)
+export default List
