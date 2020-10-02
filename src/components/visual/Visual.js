@@ -67,7 +67,7 @@ const Visual = (props) => {
       })
 
       return () => {
-        console.log('components → common → visual → [Visual.js] → useEffect(() => { .. } → return () => { .. }')
+        console.log('components → visual → [Visual.js] → useEffect(() => { .. } → return () => { .. }')
 
         // $visual.slick('unslick')
       }
@@ -76,14 +76,14 @@ const Visual = (props) => {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.group('components → common → visual → [Visual.js]')
+      console.group('components → visual → [Visual.js]')
       console.log('존재하지 않는 데이터입니다.')
       console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    console.group('components → common → visual → [Visual.js]')
+    console.group('components → visual → [Visual.js]')
     console.log('에러가 발생했어요!')
     console.groupEnd()
 
@@ -91,7 +91,7 @@ const Visual = (props) => {
   }
 
   if (loading || !visual) {
-    console.group('components → common → visual → [Visual.js]')
+    console.group('components → visual → [Visual.js]')
     console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
     console.groupEnd()
 
@@ -99,7 +99,7 @@ const Visual = (props) => {
   }
 
   if (!visual) {
-    console.group('components → common → visual → [Visual.js]')
+    console.group('components → visual → [Visual.js]')
     console.log('목록이 존재하지 않습니다.')
     console.groupEnd()
 

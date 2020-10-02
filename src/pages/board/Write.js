@@ -4,6 +4,7 @@ import Visual from '../../containers/visual/Visual'
 import Hgroup from '../../components/Hgroup'
 import Write from '../../containers/board/Write'
 import Footer from '../../components/Footer'
+import WriteActionButton from '../../containers/WriteActionButton'
 
 const navigation = [
   {
@@ -106,7 +107,7 @@ const Result = ({ location, match }) => {
     <>
       <Header />
 
-      <Visual attribute={{ category: 'hero' }} />
+      <Visual attribute={{ category: 'hero', location: location }} />
 
       <section className="container">
         <h2 className="invisible">데스티니 차일드 (Destiny Child) 본문 영역</h2>
@@ -116,6 +117,8 @@ const Result = ({ location, match }) => {
             <Hgroup attribute={{ category: category, navigation: result }} />
 
             <Write attribute={{ category: category, location: location }} />
+
+            <WriteActionButton attribute={{ category: category }} />
           </div>
         </div>
       </section>

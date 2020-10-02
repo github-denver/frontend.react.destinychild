@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 import moment from 'moment'
 import 'moment/locale/ko'
@@ -49,7 +48,7 @@ const Loading = () => {
 }
 
 const Read = (props) => {
-  const { category, read, error, loading } = props
+  const { read, error, loading, actionButton } = props
 
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -112,23 +111,7 @@ const Read = (props) => {
 
       <div className="read_contents" dangerouslySetInnerHTML={{ __html: read.content }}></div>
 
-      <div className="read_footer">
-        <div className="group_button group_half">
-          <div className="inner_half">
-            <Link to={`/beluga/${category}/list/1`} className="button_global button_default" role="button">
-              목록
-            </Link>
-          </div>
-          <div className="inner_half">
-            <Link to="/" className="button_global button_default" role="button">
-              수정
-            </Link>
-            <button type="submit" className="button_global button_default">
-              삭제
-            </button>
-          </div>
-        </div>
-      </div>
+      <div className="read_footer">{actionButton}</div>
     </Styled.read>
   )
 }

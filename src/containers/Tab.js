@@ -5,7 +5,7 @@ import { tabList, tabListInitial } from '../modules/tab/list'
 import { withRouter } from 'react-router-dom'
 
 const Result = (props) => {
-  const { location, attribute } = props
+  const { attribute } = props
 
   const { tab, error, loading } = useSelector(({ tabList, loading }) => {
     const temp = {}
@@ -24,7 +24,7 @@ const Result = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const number = typeof location.pathname.split('/').splice(-1)[0] !== 'string' ? location.pathname.split('/').splice(-1)[0] : 1
+    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
 
     dispatch(tabList({ category: attribute.category, number }))
 
@@ -33,7 +33,7 @@ const Result = (props) => {
 
       dispatch(tabListInitial())
     }
-  }, [dispatch, location.pathname, attribute.category])
+  }, [dispatch, attribute.location.pathname, attribute.category])
 
   return <Tab category={attribute.category} tab={tab} error={error} loading={loading} />
 }

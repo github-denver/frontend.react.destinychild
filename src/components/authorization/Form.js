@@ -13,11 +13,9 @@ const text = {
 
 const Form = ({ type, form, onChange, onSubmit, error }) => {
   // console.log('components → authorization → [Form.js] → type: ', type)
-  // console.log('')
 
   const result = text[type]
   // console.log('components → authorization → [Form.js] → result: ', result)
-  // console.log('')
 
   return (
     <Styled.form>

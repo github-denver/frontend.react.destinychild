@@ -41,19 +41,16 @@ function user() {
   try {
     const user = localStorage.getItem('user')
     // console.log('[index.js] → user: ', user)
-    // console.log('')
 
     const token = Cookies.get('accessToken')
     // console.log('[index.js] → token: ', token)
-    // console.log('')
 
     // console.log("[index.js] → typeof token === 'undefined': ", typeof token === 'undefined')
-    // console.log('')
+
     if (typeof token === 'undefined') return
 
     // console.log('[index.js] → tempSetUser(user)를 실행합니다.')
     // console.log('[index.js] → check(token)를 실행합니다.')
-    // console.log('')
 
     store.dispatch(tempSetUser(user))
     store.dispatch(check(token))

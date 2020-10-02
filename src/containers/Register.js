@@ -71,8 +71,7 @@ const Register = ({ history }) => {
     if (authorization) {
       // alert('회원가입에 성공했어요!')
 
-      console.log('회원가입에 성공했어요!')
-      console.log('')
+      console.log('containers → [Register.js] → 회원가입에 성공했어요!')
 
       history.push('/beluga/member/login')
     }

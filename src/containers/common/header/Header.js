@@ -6,8 +6,7 @@ import { logout } from '../../../modules/user'
 
 const Result = ({ attribute }) => {
   const minimal = attribute ? attribute.minimal : null
-  // console.log('containers → common → header → [Header.js] → minimal: ', minimal)
-  // console.log('')
+  console.log('containers → common → header → [Header.js] → minimal: ', minimal)
 
   const { user } = useSelector(({ user }) => {
     let data = {}
@@ -21,20 +20,15 @@ const Result = ({ attribute }) => {
     return { user: data.user }
   }, shallowEqual)
 
-  // console.log('containers → common → header → [Header.js] → user: ', user)
-  // console.log('')
+  console.log('containers → common → header → [Header.js] → user: ', user)
 
   const dispatch = useDispatch()
 
   const onLogout = () => {
-    console.log('containers → common → header → [Header.js] → useEffect(() => { .. } → dispatch()를 실행합니다.')
-    console.log('')
+    console.log('containers → common → header → [Header.js] → useEffect(() => { .. }')
 
     dispatch(logout2('login'))
     dispatch(logout())
-
-    console.log('containers → common → header → [Header.js] → useEffect(() => { .. } → dispatch()를 종료합니다.')
-    console.log('')
   }
 
   return <Header attribute={{ user: user, logout: onLogout, minimal: minimal }} />

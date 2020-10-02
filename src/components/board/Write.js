@@ -1,77 +1,98 @@
-import React, { useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import Field from '../Field'
-
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
 
 const Styled = {}
 
 Styled.read = styled.div``
 
-const Read = (props) => {
-  // const { category, read, error, loading } = props
-  const { error } = props
+const Read = ({ attribute }) => {
+  const { title, body, field, upload } = attribute
+  console.log('components → board → [Write.js] → attribute: ', attribute)
 
-  const [value, setValue] = useState('')
+  const quillElement = useRef(null) // quill div element
+  const quillInstance = useRef(null) // quill instance
 
-  if (error) {
-    if (error.response && error.response.status === 404) {
-      console.group('components → board → [Read.js]')
-      console.log('존재하지 않는 데이터입니다.')
-      console.groupEnd()
+  useEffect(() => {
+    quillInstance.current = new Quill(quillElement.current, {
+      theme: 'snow',
+      placeholder: '내용을 입력해 주세요.',
+      modules: {
+        // toolbar: []
+      }
+    })
 
-      return <p>존재하지 않는 데이터입니다.</p>
+    // quill에 text-change 이벤트 핸들러를 등록합니다.
+    const quill = quillInstance.current
+
+    quill.on('text-change', (delta, oldDelta, source) => {
+      if (source === 'user') {
+        field({ key: 'body', value: quill.root.innerHTML })
+      }
+    })
+  }, [field])
+
+  const mounted = useRef(false)
+
+  useEffect(() => {
+    if (mounted.current) return
+
+    mounted.current = true
+
+    quillInstance.current.root.innerHTML = body
+  }, [body])
+
+  const onChangeTitle = (event) => {
+    field({ key: 'title', value: event.target.value })
+  }
+
+  const onChangeFile = (event) => {
+    let files = null
+    let result = null
+
+    if (window.FileReader) {
+      // 이미지 파일만 통과합니다.
+      if (!event.target.files[0].type.match(/image\//)) return
+
+      // 읽기
+      const reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
+
+      files = event.target.files[0]
+      console.log('components → board → [Write.js] → files: ', files)
+
+      // 읽은 후
+      reader.onload = (event) => {
+        result = event.target.result
+        // console.log('components → board → [Write.js] → result: ', result)
+
+        const formData = new FormData()
+        formData.append('files', files)
+        formData.append('result', result)
+
+        upload({ key: 'thumbnail', value: files })
+      }
+    } else {
     }
-
-    console.group('components → board → [Read.js]')
-    console.log('에러가 발생했어요!')
-    console.groupEnd()
-
-    return <p>에러가 발생했어요!</p>
   }
-
-  /* if (loading || !read) {
-    // console.group('components → board → [Read.js]')
-    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    // console.groupEnd()
-
-    return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
-  }
-
-  if (!read) {
-    // console.group('components → board → [Read.js]')
-    // console.log('목록이 존재하지 않습니다.')
-    // console.groupEnd()
-
-    return <p>목록이 존재하지 않습니다.</p>
-  } */
 
   return (
     <Styled.read className="group_read">
       <div className="read_header">
         <strong className="title_subject">
-          <Field attribute={{ label: '제목', name: 'subject', type: 'text' }} />
+          <Field attribute={{ type: 'text', name: 'subject', value: title, label: '제목', event: onChangeTitle }} />
         </strong>
       </div>
 
       <div className="read_contents">
-        <ReactQuill theme="snow" value={value} onChange={setValue} />
+        <div ref={quillElement} />
       </div>
 
       <div className="read_footer">
         <div className="information_read">
-          <Field attribute={{ label: '대표 이미지', name: 'thumbnail', type: 'file' }} />
-        </div>
-
-        <div className="group_button">
-          <Link to="/" className="button_global button_default" role="button">
-            등록
-          </Link>
-          <button type="submit" className="button_global button_default">
-            취소
-          </button>
+          <Field attribute={{ type: 'file', name: 'thumbnail', label: '대표 이미지', event: onChangeFile }} />
         </div>
       </div>
     </Styled.read>

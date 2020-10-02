@@ -1,46 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import Write from '../../components/board/Write'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { boardWrite, boardWriteInitial } from '../../modules/board/write'
+import { changeField, changeThumbnail, initialize } from '../../modules/board/write'
 import { withRouter } from 'react-router-dom'
-import qs from 'qs'
 
 const Result = (props) => {
   const { attribute } = props
 
-  const { write, error, loading } = useSelector(({ boardWrite, loading }) => {
-    const temp = {}
-
-    if (boardWrite.data !== null) {
-      temp.boardWrite = boardWrite.data.write
-    }
+  const { title, body, thumbnail } = useSelector(({ boardWrite }) => {
+    console.log('containers → board → [Write.js] → boardWrite: ', boardWrite)
 
     return {
-      write: temp.boardWrite,
-      error: boardWrite.error,
-      loading: loading['board/BOARD_WRITE']
+      title: boardWrite.title,
+      body: boardWrite.body,
+      thumbnail: boardWrite.thumbnail
     }
   }, shallowEqual)
 
   const dispatch = useDispatch()
 
-  const prefixed = qs.parse(attribute.location.search, {
-    ignoreQueryPrefix: true
-  })
+  const field = useCallback((payload) => dispatch(changeField(payload)), [dispatch])
+
+  const upload = useCallback((payload) => dispatch(changeThumbnail(payload)), [dispatch])
 
   useEffect(() => {
-    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
-
-    dispatch(boardWrite({ category: attribute.category, number, select: prefixed.select, keyword: prefixed.keyword }))
+    console.log('containers → board → [Write.js] → useEffect(() => { .. }')
 
     return () => {
       console.log('board/BOARD_WRITE 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
-      dispatch(boardWriteInitial())
+      dispatch(initialize())
     }
-  }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword])
+  }, [dispatch])
 
-  return <Write select={prefixed.select} keyword={prefixed.keyword} category={attribute.category} write={write} error={error} loading={loading} />
+  return <Write attribute={{ category: attribute.category, title: title, body: body, thumbnail: thumbnail, field: field, upload: upload }} />
 }
 
 export default withRouter(Result)

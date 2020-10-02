@@ -35,7 +35,7 @@ function* logoutSaga() {
 
     Cookies.remove('accessToken')
 
-    console.log("modules → [authorization.js] → function* logoutSaga() { .. } → localStorage.getItem('user'): ", localStorage.getItem('user'))
+    console.log("modules → [authorization.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
   } catch (error) {
     console.error(error)
   }

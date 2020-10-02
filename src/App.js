@@ -33,7 +33,7 @@ function App() {
 
       <Route component={BoardList} path={['/beluga/:service/list', '/beluga/:service/list/:number']} />
       <Route component={BoardRead} path={['/beluga/:service/read/:number']} />
-      <Route component={BoardWrite} path={['/beluga/:service/write']} />
+      <Route component={BoardWrite} path={['/beluga/:service/write', '/beluga/:service/write/:number']} />
     </div>
   )
 }

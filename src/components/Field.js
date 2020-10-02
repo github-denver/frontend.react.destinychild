@@ -10,11 +10,13 @@ const Part = (props) => {
 
   return (
     <span className="box_field">
+      *{typeof attribute.value !== 'undefined'}*
       <input
-        type={attribute && attribute.type ? attribute.type : 'text'}
-        name={attribute && attribute.name ? attribute.name : 'name'}
-        id={attribute && attribute.name ? attribute.name : 'id'}
+        type={attribute && typeof attribute.type !== 'undefined' ? attribute.type : ''}
+        name={attribute && typeof attribute.name !== 'undefined' ? attribute.name : ''}
+        id={attribute && typeof attribute.id !== 'undefined' ? attribute.id : ''}
         className="field_local"
+        value={attribute && typeof attribute.value !== 'undefined' ? attribute.value : ''}
         onChange={onChange}
       />
     </span>
@@ -32,10 +34,10 @@ const Field = (props) => {
             {attribute.label}
           </label>
 
-          <Part attribute={attribute} onChange={onChange} />
+          <Part attribute={attribute} onChange={attribute.event ? attribute.event : onChange} />
         </>
       ) : (
-        <Part attribute={attribute} onChange={onChange} />
+        <Part attribute={attribute} onChange={attribute.event ? attribute.event : onChange} />
       )}
     </Styled.field>
   )

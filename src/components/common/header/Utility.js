@@ -14,14 +14,14 @@ const Utility = ({ attribute }) => {
       {user ? (
         <>
           <li>
-            <button type="button" className="button_global button_default" onClick={logout}>
+            <button type="button" className="button_global button_small" onClick={logout}>
               로그아웃
             </button>
           </li>
           <li>
             <Link
               to="#"
-              className="button_global button_default"
+              className="button_global button_small"
               onClick={() => {
                 alert('개발 진행 중입니다.')
               }}>

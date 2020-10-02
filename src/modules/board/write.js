@@ -1,110 +1,109 @@
 import { createAction, handleActions } from 'redux-actions'
-import produce from 'immer'
 import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
-import { takeLatest, call } from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/write'
 
-const CHANGE_FIELD = 'authorization/CHANGE_FIELD'
-const INITIAL_FORM = 'authorization/INITIAL_FORM'
+const CHANGE_FIELD = 'board/CHANGE_FIELD'
+const CHANGE_THUMBNAIL = 'board/CHANGE_THUMBNAIL'
 
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('authorization/LOGIN')
-const LOGOUT = 'authorization/LOGOUT'
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes('authorization/REGISTER')
+const [BOARD_WRITE, BOARD_WRITE_SUCCESS, BOARD_WRITE_FAILURE] = createRequestActionTypes('board/BOARD_WRITE')
+const BOARD_WRITE_INITIAL = 'board/BOARD_WRITE_INITIAL'
 
-export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => ({
-  form,
+const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST'
+
+const [BOARD_UPDATE, BOARD_UPDATE_SUCCESS, BOARD_UPDATE_FAILURE] = createRequestActionTypes('board/BOARD_UPDATE')
+
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }))
 
-export const initializeForm = createAction(INITIAL_FORM, (form) => form)
+export const changeThumbnail = createAction(CHANGE_THUMBNAIL, ({ key, value }) => ({
+  key,
+  value
+}))
 
-export const login = createAction(LOGIN, ({ id, password }) => ({ id, password }))
-export const logout2 = createAction(LOGOUT)
-export const register = createAction(REGISTER, ({ id, name, password }) => ({ id, name, password }))
+export const boardWrite = createAction(BOARD_WRITE, ({ category, payload }) => ({ category, payload }))
+export const boardUpdate = createAction(BOARD_UPDATE, ({ category, number, payload }) => ({ category, number, payload }))
 
-const loginSaga = createRequestSaga(LOGIN, api.login)
-const registerSaga = createRequestSaga(REGISTER, api.register)
+export const initialize = createAction(BOARD_WRITE_INITIAL)
 
-function* logoutSaga() {
-  try {
-    yield call(api.logout)
+export const setOriginalPost = createAction(SET_ORIGINAL_POST, (post) => {
+  console.log('modules → board → [modify.js] → setOriginalPost → post: ', post)
 
-    localStorage.removeItem('user')
+  return post
+})
 
-    console.log("modules → [authorization.js] → function* logoutSaga() { .. } → localStorage.getItem('user'): ", localStorage.getItem('user'))
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export function* authorizationSaga() {
-  yield takeLatest(LOGIN, loginSaga)
-  yield takeLatest(LOGOUT, logoutSaga)
-  yield takeLatest(REGISTER, registerSaga)
+export function* boardWriteSaga() {
+  yield takeLatest(BOARD_WRITE, createRequestSaga(BOARD_WRITE, api.write))
+  yield takeLatest(BOARD_UPDATE, createRequestSaga(BOARD_UPDATE, api.update))
 }
 
 const initialState = {
-  login: {
-    id: '',
-    password: ''
-  },
-  register: {
-    id: '',
-    name: '',
-    email: '',
-    password: '',
-    confirm: ''
-  },
-  authorization: null,
-  token: null,
-  error: null
+  title: '',
+  body: '',
+  thumbnail: null,
+  data: null,
+  error: null,
+  owner: null
 }
 
-const authorization = handleActions(
+export default handleActions(
   {
-    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) => {
-      return produce(state, (draft) => {
-        draft[form][key] = value
-      })
-    },
-    [INITIAL_FORM]: (state, { payload: form }) => {
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) => {
       return {
         ...state,
-        [form]: initialState[form],
-        error: null
+        [key]: value
       }
     },
-    [LOGIN_SUCCESS]: (state, { payload: authorization }) => {
+    [CHANGE_THUMBNAIL]: (state, { payload: { key, value } }) => {
       return {
         ...state,
-        authorization,
-        error: null
+        [key]: value
       }
     },
-    [LOGIN_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error: error
-    }),
-    [LOGOUT]: (state, { payload: form }) => {
+    [BOARD_WRITE_INITIAL]: () => {
+      return {
+        ...initialState
+      }
+    },
+    [BOARD_WRITE_SUCCESS]: (state, { payload: data }) => {
+      console.log('1. modules → board → [write.js] →  [BOARD_WRITE_SUCCESS] →  data: ', data)
+
       return {
         ...state,
-        [form]: initialState[form],
-        authorization: null,
-        error: null
+        data
       }
     },
-    [REGISTER_SUCCESS]: (state, { payload: authorization }) => ({
-      ...state,
-      authorization,
-      error: null
-    }),
-    [REGISTER_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error: error
-    })
+    [BOARD_WRITE_FAILURE]: (state, { payload: error }) => {
+      return {
+        ...state,
+        error
+      }
+    },
+    [SET_ORIGINAL_POST]: (state, { payload: data }) => {
+      console.log('2. modules → board → [write.js] →  [SET_ORIGINAL_POST] →  data: ', data)
+
+      return {
+        ...state,
+        title: data.result[0].subject,
+        body: data.result[0].content,
+        thumbnail: data.result[0].thumbnail,
+        owner: data.result[0].id
+      }
+    },
+    [BOARD_UPDATE_SUCCESS]: (state, { payload: data }) => {
+      return {
+        ...state,
+        data
+      }
+    },
+    [BOARD_UPDATE_FAILURE]: (state, { payload: error }) => {
+      return {
+        ...state,
+        error
+      }
+    }
   },
   initialState
 )
-
-export default authorization

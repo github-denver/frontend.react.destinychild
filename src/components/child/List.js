@@ -46,7 +46,7 @@ const Child = (props) => {
 
       return () => {
         if (!loading && !!list) {
-          console.log('components → common → [Child.js] → useEffect(() => { .. } → return () => { .. }')
+          console.log('components → [List.js] → useEffect(() => { .. } → return () => { .. }')
 
           // $list.slick('unslick')
         }
@@ -56,14 +56,14 @@ const Child = (props) => {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.group('components → common → child → [Child.js]')
+      console.group('components → child → [List.js]')
       console.log('존재하지 않는 데이터입니다.')
       console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    console.group('components → common → child → [Child.js]')
+    console.group('components → child → [List.js]')
     console.log('에러가 발생했어요!')
     console.groupEnd()
 
@@ -71,7 +71,7 @@ const Child = (props) => {
   }
 
   if (loading || !list) {
-    console.group('components → common → child → [Child.js]')
+    console.group('components → child → [List.js]')
     console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
     console.groupEnd()
 
@@ -79,7 +79,7 @@ const Child = (props) => {
   }
 
   if (!list) {
-    console.group('components → common → child → [Child.js]')
+    console.group('components → child → [List.js]')
     console.log('목록이 존재하지 않습니다.')
     console.groupEnd()
 

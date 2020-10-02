@@ -9,7 +9,7 @@ const LOGOUT = 'user/LOGOUT'
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes('auth/CHECK') // 회원정보 확인
 
 export const tempSetUser = createAction(TEMP_SET_USER, (user) => {
-  // console.log('modules → [user.js] → user: ', user)
+  console.log('modules → [user.js] → user: ', user)
 
   return user
 })
@@ -22,7 +22,7 @@ const checkSaga = createRequestSaga(CHECK, api.check)
 
 function checkFailureSaga() {
   try {
-    console.log("modules → [user.js] → function checkFailureSaga() { .. } → localStorage.getItem('user'): ", localStorage.getItem('user'))
+    console.log("modules → [user.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
 
     localStorage.removeItem('user')
 
@@ -40,7 +40,7 @@ function* logoutSaga() {
 
     Cookies.remove('accessToken')
 
-    console.log("modules → [user.js] → function* logoutSaga() { .. } → localStorage.getItem('user'): ", localStorage.getItem('user'))
+    console.log("modules → [user.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
   } catch (error) {
     console.error(error)
   }
