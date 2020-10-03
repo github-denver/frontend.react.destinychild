@@ -29,7 +29,7 @@ export const boardUpdate = createAction(BOARD_UPDATE, ({ category, number, paylo
 export const initialize = createAction(BOARD_WRITE_INITIAL)
 
 export const setOriginalPost = createAction(SET_ORIGINAL_POST, (post) => {
-  console.log('modules → board → [modify.js] → setOriginalPost → post: ', post)
+  // console.log('modules → board → [modify.js] → setOriginalPost → post: ', post)
 
   return post
 })
@@ -68,7 +68,7 @@ export default handleActions(
       }
     },
     [BOARD_WRITE_SUCCESS]: (state, { payload: data }) => {
-      console.log('1. modules → board → [write.js] →  [BOARD_WRITE_SUCCESS] →  data: ', data)
+      // console.log('modules → board → [write.js] →  [BOARD_WRITE_SUCCESS] →  data: ', data)
 
       return {
         ...state,
@@ -82,7 +82,7 @@ export default handleActions(
       }
     },
     [SET_ORIGINAL_POST]: (state, { payload: data }) => {
-      console.log('2. modules → board → [write.js] →  [SET_ORIGINAL_POST] →  data: ', data)
+      // console.log('modules → board → [write.js] →  [SET_ORIGINAL_POST] →  data: ', data)
 
       return {
         ...state,

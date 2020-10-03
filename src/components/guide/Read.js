@@ -10,32 +10,32 @@ const Read = (props) => {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.group('components → guide → [Read.js]')
-      console.log('존재하지 않는 데이터입니다.')
-      console.groupEnd()
+      // console.group('components → guide → [Read.js]')
+      // console.log('존재하지 않는 데이터입니다.')
+      // console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    console.group('components → guide → [Read.js]')
-    console.log('에러가 발생했어요!')
-    console.groupEnd()
+    // console.group('components → guide → [Read.js]')
+    // console.log('에러가 발생했어요!')
+    // console.groupEnd()
 
     return <p>에러가 발생했어요!</p>
   }
 
   if (loading || !read) {
-    console.group('components → guide → [Read.js]')
-    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    console.groupEnd()
+    // console.group('components → guide → [Read.js]')
+    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    // console.groupEnd()
 
     return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
   }
 
   if (!read) {
-    console.group('components → guide → [Read.js]')
-    console.log('목록이 존재하지 않습니다.')
-    console.groupEnd()
+    // console.group('components → guide → [Read.js]')
+    // console.log('목록이 존재하지 않습니다.')
+    // console.groupEnd()
 
     return <p>목록이 존재하지 않습니다.</p>
   }
@@ -47,11 +47,11 @@ const Read = (props) => {
         <h3 className="title_guide">{read.subject} 소개</h3>
       </div>
 
-      <div className="group_vis2ual2" style={{ backgroundImage: `url(http://localhost:4000/uploads/${read.upload2})` }}>
+      <div className="group_signage" style={{ backgroundImage: `url(http://localhost:4000/uploads/${read.upload2})` }}>
         <div className="outer_cell">
           <div className="inner_cell">
-            <h4 className="title_vis2ual2">{read.subject}</h4>
-            <p className="description_vis2ual2" dangerouslySetInnerHTML={{ __html: read.files }}></p>
+            <h4 className="title_signage">{read.subject}</h4>
+            <p className="description_signage" dangerouslySetInnerHTML={{ __html: read.files }}></p>
           </div>
         </div>
       </div>

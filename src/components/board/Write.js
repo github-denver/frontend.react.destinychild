@@ -10,7 +10,7 @@ Styled.read = styled.div``
 
 const Read = ({ attribute }) => {
   const { title, body, field, upload } = attribute
-  console.log('components → board → [Write.js] → attribute: ', attribute)
+  // console.log('components → board → [Write.js] → attribute: ', attribute)
 
   const quillElement = useRef(null) // quill div element
   const quillInstance = useRef(null) // quill instance
@@ -61,7 +61,7 @@ const Read = ({ attribute }) => {
       reader.readAsDataURL(event.target.files[0])
 
       files = event.target.files[0]
-      console.log('components → board → [Write.js] → files: ', files)
+      // console.log('components → board → [Write.js] → files: ', files)
 
       // 읽은 후
       reader.onload = (event) => {

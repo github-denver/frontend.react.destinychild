@@ -15,6 +15,8 @@ const Search = (props) => {
   const [keyword, setKeyword] = useState('')
 
   const onChange = (event) => {
+    // console.log('components → [Search.js] → event.target.tagName: ', event.target.tagName)
+
     if (event.target.tagName.toLowerCase() === 'select') {
       setSelect(event.target.options[event.target.selectedIndex].value)
     }

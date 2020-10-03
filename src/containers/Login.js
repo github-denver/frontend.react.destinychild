@@ -64,7 +64,7 @@ const Login = ({ history }) => {
     }
 
     if (!!token) {
-      console.log('containers → [Login.js] → 로그인에 성공했어요!')
+      // console.log('containers → [Login.js] → 로그인에 성공했어요!')
 
       dispatch(check(token))
     }
@@ -72,7 +72,7 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     if (user) {
-      console.log('containers → [Login.js] → check API 성공했어요!')
+      // console.log('containers → [Login.js] → check API 성공했어요!')
 
       history.push('/beluga')
 

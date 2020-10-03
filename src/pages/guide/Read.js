@@ -111,7 +111,7 @@ const Result = ({ location }) => {
             </span>
           </h1>
 
-          <div className="group_location_guide">홈 &gt; 가이드 &gt; ?</div>
+          <div className="group_location_guide">홈 &gt; 게임 가이드</div>
         </div>
       </header>
 

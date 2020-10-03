@@ -876,27 +876,27 @@
   vertical-align: middle;
 }
 
-/* group_vis2ual2
+/* group_signage
 ---------- ---------- ---------- ---------- ---------- */
-.group_vis2ual2 {
+.group_signage {
   height: 400px;
   margin-top: 48px;
   /* background-color: #333; */
   text-align: center;
 }
 
-.group_vis2ual2 .outer_cell {
+.group_signage .outer_cell {
   width: 100%;
 }
 
-.group_vis2ual2 .title_vis2ual2 {
+.group_signage .title_signage {
   /* font-family: 'NotoSansKR-DemiLight-Hestia'; */
   /* font-weight: 500; */
   font-size: 48px;
   color: #fff;
 }
 
-.group_vis2ual2 .description_vis2ual2 {
+.group_signage .description_signage {
   /* font-family: 'NotoSansKR-This-Hestia'; */
   /* font-weight: 300; */
   font-size: 18px;
@@ -967,27 +967,27 @@
   vertical-align: middle;
 }
 
-/* group_vis2ual2
+/* group_signage
 ---------- ---------- ---------- ---------- ---------- */
-.group_vis2ual2 {
+.group_signage {
   height: 400px;
   margin-top: 48px;
   /* background-color: #333; */
   text-align: center;
 }
 
-.group_vis2ual2 .outer_cell {
+.group_signage .outer_cell {
   width: 100%;
 }
 
-.group_vis2ual2 .title_vis2ual2 {
+.group_signage .title_signage {
   /* font-family: 'NotoSansKR-DemiLight-Hestia'; */
   /* font-weight: 500; */
   font-size: 48px;
   color: #fff;
 }
 
-.group_vis2ual2 .description_vis2ual2 {
+.group_signage .description_signage {
   /* font-family: 'NotoSansKR-This-Hestia'; */
   /* font-weight: 300; */
   font-size: 18px;

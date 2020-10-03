@@ -6,7 +6,7 @@ import { logout } from '../../../modules/user'
 
 const Result = ({ attribute }) => {
   const minimal = attribute ? attribute.minimal : null
-  console.log('containers → common → header → [Header.js] → minimal: ', minimal)
+  // console.log('containers → common → header → [Header.js] → minimal: ', minimal)
 
   const { user } = useSelector(({ user }) => {
     let data = {}
@@ -20,12 +20,12 @@ const Result = ({ attribute }) => {
     return { user: data.user }
   }, shallowEqual)
 
-  console.log('containers → common → header → [Header.js] → user: ', user)
+  // console.log('containers → common → header → [Header.js] → user: ', user)
 
   const dispatch = useDispatch()
 
   const onLogout = () => {
-    console.log('containers → common → header → [Header.js] → useEffect(() => { .. }')
+    // console.log('containers → common → header → [Header.js] → useEffect(() => { .. }')
 
     dispatch(logout2('login'))
     dispatch(logout())

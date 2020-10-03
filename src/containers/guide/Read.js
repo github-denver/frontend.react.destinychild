@@ -29,7 +29,7 @@ const Result = (props) => {
     dispatch(boardRead({ category: attribute.category, number }))
 
     return () => {
-      console.log('board/BOARD_READ 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('board/BOARD_READ 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(boardReadInitial())
     }

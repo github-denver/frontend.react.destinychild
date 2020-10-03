@@ -67,8 +67,7 @@ const Hero = (props) => {
       })
 
       return () => {
-        console.log('components → slick → [Hero.js] → useEffect(() => { .. } → return () => { .. }')
-
+        // console.log('components → slick → [Hero.js] → useEffect(() => { .. } → return () => { .. }')
         // $hero.slick('unslick')
       }
     }
@@ -76,32 +75,32 @@ const Hero = (props) => {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.group('components → slick → [Hero.js]')
-      console.log('존재하지 않는 데이터입니다.')
-      console.groupEnd()
+      // console.group('components → slick → [Hero.js]')
+      // console.log('존재하지 않는 데이터입니다.')
+      // console.groupEnd()
 
       return <p>존재하지 않는 데이터입니다.</p>
     }
 
-    console.group('components → slick → [Hero.js]')
-    console.log('에러가 발생했어요!')
-    console.groupEnd()
+    // console.group('components → slick → [Hero.js]')
+    // console.log('에러가 발생했어요!')
+    // console.groupEnd()
 
     return <p>에러가 발생했어요!</p>
   }
 
   if (loading || !hero) {
-    console.group('components → slick → [Hero.js]')
-    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    console.groupEnd()
+    // console.group('components → slick → [Hero.js]')
+    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    // console.groupEnd()
 
     return <Loading />
   }
 
   if (hero.length === 0) {
-    console.group('components → slick → [Hero.js]')
-    console.log('목록이 존재하지 않습니다.')
-    console.groupEnd()
+    // console.group('components → slick → [Hero.js]')
+    // console.log('목록이 존재하지 않습니다.')
+    // console.groupEnd()
 
     return <p>목록이 존재하지 않습니다.</p>
   }

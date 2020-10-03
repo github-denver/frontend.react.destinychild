@@ -8,7 +8,7 @@ const Result = (props) => {
   const { attribute } = props
 
   const { title, body, thumbnail } = useSelector(({ boardWrite }) => {
-    console.log('containers → board → [Write.js] → boardWrite: ', boardWrite)
+    // console.log('containers → board → [Write.js] → boardWrite: ', boardWrite)
 
     return {
       title: boardWrite.title,
@@ -24,10 +24,10 @@ const Result = (props) => {
   const upload = useCallback((payload) => dispatch(changeThumbnail(payload)), [dispatch])
 
   useEffect(() => {
-    console.log('containers → board → [Write.js] → useEffect(() => { .. }')
+    // console.log('containers → board → [Write.js] → useEffect(() => { .. }')
 
     return () => {
-      console.log('board/BOARD_WRITE 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('board/BOARD_WRITE 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(initialize())
     }

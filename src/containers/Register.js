@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeField, initializeForm, register } from '../modules/authorization'
+import { changeField, initializeForm, register, registerInitial } from '../modules/authorization'
 import Form from '../components/authorization/Form'
 import { withRouter } from 'react-router-dom'
 
@@ -55,7 +55,7 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      console.log('containers → [Register.js] → error: ', error)
+      // console.log('containers → [Register.js] → error: ', error)
 
       if (error.response.status === 400) {
         setMessage('이미 가입된 아이디입니다!')
@@ -67,15 +67,21 @@ const Register = ({ history }) => {
 
       return
     }
-
+    // console.log('containers → [Register.js] → authorization: ', authorization)
     if (authorization) {
       // alert('회원가입에 성공했어요!')
 
-      console.log('containers → [Register.js] → 회원가입에 성공했어요!')
+      // console.log('containers → [Register.js] → 회원가입에 성공했어요!')
 
       history.push('/beluga/member/login')
     }
-  }, [error, authorization, history])
+
+    return () => {
+      // console.log('authorization/REGISTER_INITIAL 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+
+      dispatch(registerInitial())
+    }
+  }, [error, authorization, history, dispatch])
 
   return <Form type="register" form={form} onChange={onChange} onSubmit={onSubmit} error={message} />
 }

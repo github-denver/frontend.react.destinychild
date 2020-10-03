@@ -29,7 +29,7 @@ const Result = (props) => {
     dispatch(mediaList({ category: attribute.category, number: 1 }))
 
     return () => {
-      console.log('media/MEDIA_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('media/MEDIA_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(mediaListInitial())
     }

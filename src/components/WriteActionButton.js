@@ -6,7 +6,7 @@ const Styled = {}
 Styled.button = styled.div``
 
 const Button = ({ attribute }) => {
-  console.log('components → [WriteActionButton.js] → attribute: ', attribute)
+  // console.log('components → [WriteActionButton.js] → attribute: ', attribute)
 
   const { publish, cancel, owner } = attribute
 

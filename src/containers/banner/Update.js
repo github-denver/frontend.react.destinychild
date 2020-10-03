@@ -27,7 +27,7 @@ const Result = (props) => {
     dispatch(updateList({ category: attribute.category }))
 
     return () => {
-      console.log('update/UPDATE_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('update/UPDATE_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(updateListInitial())
     }

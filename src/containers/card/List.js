@@ -36,7 +36,7 @@ const Result = (props) => {
     dispatch(cardList({ category: attribute.category, number, select: prefixed.select, keyword: prefixed.keyword }))
 
     return () => {
-      console.log('card/CARD_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('card/CARD_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(cardListInitial())
     }

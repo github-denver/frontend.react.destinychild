@@ -9,11 +9,11 @@ import { removePost } from '../../lib/api/read'
 
 const Result = (props) => {
   const { attribute, history } = props
-  console.log('containers → board → [Read.js] → attribute: ', attribute)
+  // console.log('containers → board → [Read.js] → attribute: ', attribute)
 
   const { read, error, loading, user } = useSelector(({ boardRead, loading, user }) => {
-    console.log('containers → board → [Read.js] → boardRead: ', boardRead)
-    console.log('containers → board → [Read.js] → user: ', user)
+    // console.log('containers → board → [Read.js] → boardRead: ', boardRead)
+    // console.log('containers → board → [Read.js] → user: ', user)
 
     const temp = {}
 
@@ -32,28 +32,28 @@ const Result = (props) => {
       user: temp.user
     }
   }, shallowEqual)
-  console.log('containers → board → [Read.js] → read: ', read)
+  // console.log('containers → board → [Read.js] → read: ', read)
 
   const dispatch = useDispatch()
 
   const number = attribute.location.pathname.split('/').splice(-1)[0]
 
   useEffect(() => {
-    console.log('containers → board → [Read.js] → number: ', number)
+    // console.log('containers → board → [Read.js] → number: ', number)
 
     dispatch(boardRead({ category: attribute.category, number }))
 
     return () => {
-      console.log('board/BOARD_READ 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      // console.log('board/BOARD_READ 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(boardReadInitial())
     }
   }, [dispatch, attribute.category, attribute.location.pathname, number])
 
   const edit = () => {
-    console.log('containers → board → [Read.js] → const edit = () => { .. }')
-    console.log('containers → board → [Read.js] → attribute.category: ', attribute.category)
-    console.log('containers → board → [Read.js] → read: ', read)
+    // console.log('containers → board → [Read.js] → const edit = () => { .. }')
+    // console.log('containers → board → [Read.js] → attribute.category: ', attribute.category)
+    // console.log('containers → board → [Read.js] → read: ', read)
 
     dispatch(setOriginalPost({ result: [read] }))
 
@@ -65,15 +65,15 @@ const Result = (props) => {
       await removePost({ category: attribute.category, number })
       history.push(`/beluga/${attribute.category}/list`)
     } catch (error) {
-      console.log('containers → board → [Read.js] → const remove = () => { .. }')
-      console.log('containers → board → [Read.js] → error: ', error)
+      // console.log('containers → board → [Read.js] → const remove = () => { .. }')
+      // console.log('containers → board → [Read.js] → error: ', error)
     }
   }
 
   const owner = (function () {
-    console.log('containers → board → [Read.js] → const owner = () => { .. }')
-    console.log('containers → board → [Read.js] → user: ', user)
-    console.log('containers → board → [Read.js] → read: ', read)
+    // console.log('containers → board → [Read.js] → const owner = () => { .. }')
+    // console.log('containers → board → [Read.js] → user: ', user)
+    // console.log('containers → board → [Read.js] → read: ', read)
 
     return (user && user.id) === (read && read.id)
   })()

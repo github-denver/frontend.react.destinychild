@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 
 const CHANGE_FIELD = 'authorization/CHANGE_FIELD'
 const INITIAL_FORM = 'authorization/INITIAL_FORM'
+const REGISTER_INITIAL = 'authorization/REGISTER_INITIAL'
 
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('authorization/LOGIN')
 const LOGOUT = 'authorization/LOGOUT'
@@ -19,6 +20,8 @@ export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => 
 }))
 
 export const initializeForm = createAction(INITIAL_FORM, (form) => form)
+
+export const registerInitial = createAction(REGISTER_INITIAL)
 
 export const login = createAction(LOGIN, ({ id, password }) => ({ id, password }))
 export const logout2 = createAction(LOGOUT)
@@ -35,7 +38,7 @@ function* logoutSaga() {
 
     Cookies.remove('accessToken')
 
-    console.log("modules → [authorization.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
+    // console.log("modules → [authorization.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
   } catch (error) {
     console.error(error)
   }
@@ -97,15 +100,27 @@ const authorization = handleActions(
         error: null
       }
     },
-    [REGISTER_SUCCESS]: (state, { payload: authorization }) => ({
-      ...state,
-      authorization,
-      error: null
-    }),
+    [REGISTER_SUCCESS]: (state, { payload: authorization }) => {
+      // console.log('modules → [authorization.js] → [REGISTER_SUCCESS] → authorization: ', authorization)
+
+      return {
+        ...state,
+        authorization,
+        error: null
+      }
+    },
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error: error
-    })
+    }),
+    [REGISTER_INITIAL]: (state) => {
+      // console.log('modules → [authorization.js] → [REGISTER_INITIAL] → state: ', state)
+
+      return {
+        ...state,
+        authorization: null
+      }
+    }
   },
   initialState
 )
