@@ -1,5 +1,6 @@
 /* @font-face
 ---------- ---------- ---------- ---------- ---------- */
+/*
 @font-face {
   font-family: 'Roboto-Thin';
   font-style: normal;
@@ -160,6 +161,7 @@
   src: url(/fonts/NanumGothic/NanumGothicExtraBold.eot?#iefix) format('embedded-opentype');
   src: url(/fonts/NanumGothic/NanumGothicExtraBold.woff) format('woff'), url(/fonts/NanumGothic/NanumGothicExtraBold.ttf) format('truetype');
 }
+*/
 
 /* reset
 ---------- ---------- ---------- ---------- ---------- */
