@@ -282,7 +282,7 @@ const Card = (props) => {
 
           {list.length !== 0 && (
             <>
-              <Pagination pagination={pagination} />
+              <Pagination category={category} pagination={pagination} />
 
               <Search attribute={{ category: category, select: select, keyword: keyword }} />
             </>

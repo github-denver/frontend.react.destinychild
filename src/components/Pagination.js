@@ -11,13 +11,13 @@ const queryString = ({ service, number }) => {
 }
 
 const Pagination = (props) => {
-  const { pagination } = props
+  const { category, pagination } = props
 
   const list = []
 
   for (let i = pagination.start; i <= pagination.end; i++) {
     list.push(
-      <Link to={queryString({ service: 'notice', number: i })} key={i} className="link_pagination current">
+      <Link to={queryString({ service: category, number: i })} key={i} className="link_pagination current">
         {i}
       </Link>
     )
