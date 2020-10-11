@@ -25,9 +25,18 @@ const Result = (props) => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
 
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
+
+  useEffect(() => {
     dispatch(boardList({ category: attribute.category, number }))
 
     return () => {
@@ -35,7 +44,7 @@ const Result = (props) => {
 
       dispatch(boardListInitial())
     }
-  }, [dispatch, attribute.location.pathname, attribute.category])
+  }, [dispatch, attribute.location.pathname, attribute.category, number])
 
   return <Guide category={attribute.category} list={list} pagination={pagination} error={error} loading={loading} />
 }

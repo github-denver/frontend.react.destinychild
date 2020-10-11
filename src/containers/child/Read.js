@@ -23,9 +23,18 @@ const Result = (props) => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const number = attribute.location.pathname.split('/').splice(-1)[0]
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
 
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
+
+  useEffect(() => {
     dispatch(childRead({ category: attribute.category, number }))
 
     return () => {
@@ -33,7 +42,7 @@ const Result = (props) => {
 
       dispatch(childReadInitial())
     }
-  }, [dispatch, attribute.location.pathname, attribute.category])
+  }, [dispatch, attribute.location.pathname, attribute.category, number])
 
   return <Read category={attribute.category} read={read} error={error} loading={loading} />
 }

@@ -30,9 +30,18 @@ const Result = (props) => {
     ignoreQueryPrefix: true
   })
 
-  useEffect(() => {
-    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
 
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
+
+  useEffect(() => {
     dispatch(cardList({ category: attribute.category, number, select: prefixed.select, keyword: prefixed.keyword }))
 
     return () => {
@@ -40,7 +49,7 @@ const Result = (props) => {
 
       dispatch(cardListInitial())
     }
-  }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword])
+  }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword, number])
 
   return (
     <Card

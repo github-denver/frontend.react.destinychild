@@ -36,11 +36,18 @@ const Result = (props) => {
 
   const dispatch = useDispatch()
 
-  const number = attribute.location.pathname.split('/').splice(-1)[0]
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
+
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
 
   useEffect(() => {
-    // console.log('containers → board → [Read.js] → number: ', number)
-
     dispatch(boardRead({ category: attribute.category, number }))
 
     return () => {

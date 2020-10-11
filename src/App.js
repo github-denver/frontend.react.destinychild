@@ -25,15 +25,15 @@ function App() {
       <Route component={Login} path={['/beluga/member/login']} />
       <Route component={Register} path={['/beluga/member/register']} />
 
+      <Route component={BoardList} path={['/beluga/:service/list', '/beluga/:service/list/:number']} />
+      <Route component={BoardRead} path={['/beluga/:service/read', '/beluga/:service/read/:number']} />
+      <Route component={BoardWrite} path={['/beluga/:service/write', '/beluga/:service/write/:number']} />
+
       <Route component={GuideList} path={['/beluga/dictionary/book']} />
       <Route component={GuideRead} path={['/beluga/dictionary/detail/:number']} />
 
       <Route component={ChildList} path={['/beluga/child/book']} />
       <Route component={ChildRead} path={['/beluga/child/detail/:number']} />
-
-      <Route component={BoardList} path={['/beluga/:service/list', '/beluga/:service/list/:number']} />
-      <Route component={BoardRead} path={['/beluga/:service/read/:number']} />
-      <Route component={BoardWrite} path={['/beluga/:service/write', '/beluga/:service/write/:number']} />
     </div>
   )
 }

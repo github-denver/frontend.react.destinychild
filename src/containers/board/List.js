@@ -30,8 +30,19 @@ const Result = (props) => {
     ignoreQueryPrefix: true
   })
 
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
+
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
+
   useEffect(() => {
-    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
+    // const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
 
     dispatch(boardList({ category: attribute.category, number, select: prefixed.select, keyword: prefixed.keyword }))
 
@@ -40,7 +51,7 @@ const Result = (props) => {
 
       dispatch(boardListInitial())
     }
-  }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword])
+  }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword, number])
 
   return (
     <List

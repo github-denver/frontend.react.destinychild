@@ -23,9 +23,18 @@ const Result = (props) => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const number = typeof attribute.location.pathname.split('/').splice(-1)[0] !== 'string' ? attribute.location.pathname.split('/').splice(-1)[0] : 1
+  let number = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-1)[0]
 
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
+
+  useEffect(() => {
     dispatch(tabList({ category: attribute.category, number }))
 
     return () => {
@@ -33,7 +42,7 @@ const Result = (props) => {
 
       dispatch(tabListInitial())
     }
-  }, [dispatch, attribute.location.pathname, attribute.category])
+  }, [dispatch, attribute.location.pathname, attribute.category, number])
 
   return <Tab category={attribute.category} tab={tab} error={error} loading={loading} />
 }
