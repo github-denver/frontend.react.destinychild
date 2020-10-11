@@ -33,7 +33,7 @@ const Child = (props) => {
       })
 
       $list.on('beforeChange', (event, slick, currentSlide, prevSlide) => {
-        indicator.$page.find('.emph_page').text(prevSlide + 1)
+        indicator.$page.find('.emphasis_page').text(prevSlide + 1)
       })
 
       indicator.$arrow.find('.slick-prev').on('click', () => {

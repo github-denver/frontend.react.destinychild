@@ -113,13 +113,8 @@ const List = (props) => {
         </div>
       </div>
 
-      {list.length !== 0 && (
-        <>
-          <Pagination category={category} pagination={pagination} />
-
-          <Search attribute={{ category: category, select: select, keyword: keyword }} />
-        </>
-      )}
+      <Pagination category={category} pagination={pagination} />
+      <Search attribute={{ category: category, select: select, keyword: keyword }} />
     </>
   )
 }

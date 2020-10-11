@@ -38,7 +38,7 @@ const Hero = (props) => {
       setTotal($item.length)
 
       $hero.not('.slick-initialized').on('init', (event, slick) => {
-        indicator.$page.find('.emph_page').text(1)
+        indicator.$page.find('.emphasis_page').text(1)
         indicator.$page.find('.text_total').text(hero.length)
       })
 
@@ -55,7 +55,7 @@ const Hero = (props) => {
       })
 
       $hero.on('beforeChange', (event, slick, currentSlide, prevSlide) => {
-        indicator.$page.find('.emph_page').text(prevSlide + 1)
+        indicator.$page.find('.emphasis_page').text(prevSlide + 1)
       })
 
       indicator.$arrow.find('.slick-prev').on('click', () => {
@@ -138,7 +138,7 @@ const Hero = (props) => {
 
       <div className="hero_indicator">
         <div className="hero_indicator_page">
-          <em className="emph_page"></em>
+          <em className="emphasis_page"></em>
           <span className="text_slash">/</span>
           <span className="text_total">{total}</span>
         </div>
@@ -152,8 +152,8 @@ const Hero = (props) => {
           </button>
         </div>
 
-        <Link to="/" className="button_indicator button_detail">
-          전체 이벤트 보러가기
+        <Link to="/beluga/update/list" className="button_indicator button_detail">
+          더 보기
         </Link>
       </div>
     </Styled.hero>

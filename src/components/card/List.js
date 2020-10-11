@@ -215,7 +215,7 @@ const Card = (props) => {
                       </span>
 
                       <span className="information_card">
-                        <em className="emph_card">{currentValue.content}</em>
+                        <em className="emphasis_card">{currentValue.content}</em>
 
                         <strong className="text_card">{currentValue.subject}</strong>
 
@@ -280,13 +280,8 @@ const Card = (props) => {
             </div>
           </div>
 
-          {list.length !== 0 && (
-            <>
-              <Pagination category={category} pagination={pagination} />
-
-              <Search attribute={{ category: category, select: select, keyword: keyword }} />
-            </>
-          )}
+          <Pagination category={category} pagination={pagination} />
+          <Search attribute={{ category: category, select: select, keyword: keyword }} />
         </>
       )}
     </>

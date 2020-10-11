@@ -38,7 +38,7 @@ const Visual = (props) => {
       setTotal($item.length)
 
       $visual.not('.slick-initialized').on('init', (event, slick) => {
-        indicator.$page.find('.emph_page').text(1)
+        indicator.$page.find('.emphasis_page').text(1)
         indicator.$page.find('.text_total').text(total)
       })
 
@@ -55,7 +55,7 @@ const Visual = (props) => {
       })
 
       $visual.on('beforeChange', (event, slick, currentSlide, prevSlide) => {
-        indicator.$page.find('.emph_page').text(prevSlide + 1)
+        indicator.$page.find('.emphasis_page').text(prevSlide + 1)
       })
 
       indicator.$arrow.find('.slick-prev').on('click', () => {

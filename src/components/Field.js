@@ -34,6 +34,7 @@ const Part = (props) => {
 const Field = (props) => {
   const { attribute, onChange } = props
   // console.log('components → [Field.js] → attribute: ', attribute)
+  // console.log('')
 
   return (
     <Styled.field className="group_field">

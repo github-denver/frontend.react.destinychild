@@ -37,6 +37,17 @@ const Header = ({ attribute }) => {
             </Link>
           </span>
         </h1>
+
+        {minimal && (
+          <>
+            <div className="grp_collab">
+              <span className="text_collab">X</span>
+              <strong className="title_collab">덴버월드</strong>
+              <em className="emphasis_collab">이 사이트는 덴버월드 사이트의 아이디와 패스워드가 공유됩니다.</em>
+            </div>
+          </>
+        )}
+
         {!minimal && (
           <>
             {/* <Utility attribute={{ user: user, event: { logout: event.logout, visible: handlerVisible } }} /> */}

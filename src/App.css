@@ -108,6 +108,12 @@
   margin-left: 0;
 }
 
+.group_button + .group_search {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+}
+
 /* group_profile
 ---------- ---------- ---------- ---------- ---------- */
 .group_profile {
@@ -741,7 +747,7 @@
   vertical-align: top;
 }
 
-.group_hero .emph_page {
+.group_hero .emphasis_page {
   font-style: normal;
   font-size: 16px;
   line-height: 70px;
@@ -787,13 +793,16 @@
   margin: 0;
   border: 0 none;
   background-color: transparent;
-  font-size: 1px;
-  color: transparent;
+  /* font-size: 1px;
+  color: transparent; */
+  font-size: 14px;
+  color: #fff;
   vertical-align: top;
   cursor: pointer;
 }
 
 .group_hero .button_indicator:before {
+  display: none;
   content: '';
 }
 
@@ -808,8 +817,10 @@
   max-width: 1280px;
   height: 70px;
   margin-left: 1px;
+  line-height: 70px;
   background-color: rgba(0, 0, 0, 0.8);
   vertical-align: top;
+  text-align: center;
 }
 
 /* group_search
@@ -1238,7 +1249,7 @@
   text-align: left;
 }
 
-.list_card .emph_card {
+.list_card .emphasis_card {
   display: block;
   font-style: normal;
   /* font-family: 'NotoSansKR-Light-Hestia'; */
@@ -1616,10 +1627,17 @@
   margin: 0;
   border: 0 none;
   background-color: #fff;
-  font-size: 1px;
-  color: transparent;
+  /* font-size: 1px;
+  color: transparent; */
+  font-size: 12px;
+  color: #000;
   vertical-align: top;
+  text-align: center;
   cursor: pointer;
+}
+
+.group_banner .button_page:before {
+  display: none;
 }
 
 .group_banner .button_page:focus {
@@ -1975,7 +1993,7 @@ margin-top: 24px;
   vertical-align: top;
 }
 
-.group_visual .emph_page {
+.group_visual .emphasis_page {
   font-style: normal;
   font-size: 16px;
   line-height: 70px;
@@ -2140,4 +2158,22 @@ margin-top: 24px;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 639px) {
+}
+
+/* grp_collab
+---------- ---------- ---------- ---------- ---------- */
+.grp_collab {
+  width: 360px;
+  margin: 0 auto 12px;
+}
+
+.grp_collab .title_collab {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.grp_collab .emphasis_collab {
+  font-style: normal;
+  font-size: 12px;
 }
