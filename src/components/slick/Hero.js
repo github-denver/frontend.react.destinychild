@@ -21,7 +21,8 @@ const Loading = () => {
 }
 
 const Hero = (props) => {
-  const { category, hero, error, loading } = props
+  // const { category, hero, error, loading } = props
+  const { hero, error, loading } = props
 
   const [total, setTotal] = useState(0)
 
@@ -111,7 +112,7 @@ const Hero = (props) => {
         {hero.map((currentValue, index) => {
           return (
             <div className="box_hero" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }} key={currentValue.number}>
-              <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_hero">
+              <Link to={currentValue.url} className="link_hero">
                 <div className="information_hero">
                   <div className="outer_cell">
                     <div className="inner_cell">
