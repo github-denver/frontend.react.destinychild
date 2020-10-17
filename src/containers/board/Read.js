@@ -43,14 +43,7 @@ const Result = (props) => {
     })
     .splice(-1)[0]
 
-  let test = attribute.location.pathname
-    .split('/')
-    .filter((element) => {
-      return element !== null && element !== undefined && element !== ''
-    })
-    .splice(-2)[0]
-
-  if (number === 'list' || number === 'read' || test === 'read') {
+  if (number === 'list' || number === 'read') {
     number = 1
   }
 
