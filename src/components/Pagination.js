@@ -7,7 +7,7 @@ const Styled = {}
 Styled.pagination = styled.div``
 
 const queryString = ({ service, number }) => {
-  return `/${service}/list/${number}`
+  return `/beluga/${service}/list/${number}`
 }
 
 const Pagination = (props) => {

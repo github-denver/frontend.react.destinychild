@@ -37,7 +37,14 @@ const Result = (props) => {
     })
     .splice(-1)[0]
 
-  if (number === 'list' || number === 'read') {
+  let test = attribute.location.pathname
+    .split('/')
+    .filter((element) => {
+      return element !== null && element !== undefined && element !== ''
+    })
+    .splice(-2)[0]
+
+  if (number === 'list' || number === 'read' || test === 'read') {
     number = 1
   }
 

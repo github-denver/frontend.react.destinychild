@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../containers/common/header/Header'
 import Hero from '../containers/slick/Hero'
 import Hgroup from '../components/Hgroup'
+import Tab from '../containers/Tab'
 import Update from '../containers/banner/Update'
 import Event from '../containers/banner/Event'
 import Card from '../containers/card/List'
@@ -25,13 +26,7 @@ const Result = ({ location }) => {
               <div className="inner_triple">
                 <Hgroup attribute={{ title: '새소식' }} />
 
-                <ul className="list_global">
-                  <li>데스티니 차일드 (Destiny Child)</li>
-                  <li>데스티니 차일드 (Destiny Child)</li>
-                  <li>데스티니 차일드 (Destiny Child)</li>
-                  <li>데스티니 차일드 (Destiny Child)</li>
-                  <li>데스티니 차일드 (Destiny Child)</li>
-                </ul>
+                <Tab attribute={{ category: 'notice', location: location }} />
               </div>
 
               <div className="inner_triple">

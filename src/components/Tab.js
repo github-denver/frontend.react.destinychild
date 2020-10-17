@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -8,16 +8,6 @@ Styled.tab = styled.div``
 
 const Tab = (props) => {
   const { tab, error, loading } = props
-
-  const handlerVisible = useCallback((event) => {
-    event.preventDefault()
-
-    event.target.parentElement.parentElement.children.forEach((element, index) => {
-      element.classList.remove('current')
-    })
-
-    event.target.parentElement.classList.add('current')
-  }, [])
 
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -51,58 +41,19 @@ const Tab = (props) => {
     return <p>목록이 존재하지 않습니다.</p>
   }
 
+  const result = tab.slice(0, 5)
+
   return (
     <>
       <Styled.tab className="group_tab">
-        <ul className="list_tab">
-          <li className="current">
-            <Link to="/" className="link_tab" onClick={handlerVisible}>
-              공지사항
-            </Link>
-            <ul className="list_common">
-              {tab.map((currentValue, index) => {
-                return (
-                  <li key={currentValue.number}>
-                    <Link to="/" className="link_common">
-                      {currentValue.subject}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </li>
-          <li>
-            <Link to="/" className="link_tab" onClick={handlerVisible}>
-              업데이트
-            </Link>
-            <ul className="list_common">
-              {tab.map((currentValue, index) => {
-                return (
-                  <li key={currentValue.number}>
-                    <Link to="/" className="link_common">
-                      {currentValue.subject}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </li>
-          <li>
-            <Link to="/" className="link_tab" onClick={handlerVisible}>
-              이벤트
-            </Link>
-            <ul className="list_common">
-              {tab.map((currentValue, index) => {
-                return (
-                  <li key={currentValue.number}>
-                    <Link to="/" className="link_common">
-                      {currentValue.subject}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </li>
+        <ul className="list_global">
+          {result.map((currentValue, index) => {
+            return (
+              <li key={currentValue.number}>
+                <Link to={`/beluga/notice/read/${currentValue.number}`}>{currentValue.subject}</Link>
+              </li>
+            )
+          })}
         </ul>
       </Styled.tab>
     </>
