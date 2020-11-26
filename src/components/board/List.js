@@ -43,7 +43,9 @@ const Loading = () => {
 }
 
 const List = (props) => {
-  const { select, keyword, category, list, pagination, error, loading } = props
+  const { user, select, keyword, category, list, pagination, error, loading } = props
+
+  // console.log('components → board → [List.js] → user: ', user)
 
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -107,9 +109,11 @@ const List = (props) => {
       <div className="group_button group_half">
         <div className="inner_half"></div>
         <div className="inner_half">
-          <Link to={`/beluga/${category}/write`} className="button_global button_default" role="button">
-            등록
-          </Link>
+          {user && typeof user !== 'undefined' && (
+            <Link to={`/beluga/${category}/write`} className="button_global button_default" role="button">
+              등록
+            </Link>
+          )}
         </div>
       </div>
 
