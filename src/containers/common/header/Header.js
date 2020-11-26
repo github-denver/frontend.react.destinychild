@@ -9,15 +9,15 @@ const Result = ({ attribute }) => {
   // console.log('containers → common → header → [Header.js] → minimal: ', minimal)
 
   const { user } = useSelector(({ user }) => {
-    let data = {}
+    let temp = {}
 
     if (user.user !== null) {
       const result = typeof user.user === 'string' ? JSON.parse(user.user) : user.user
 
-      data.user = result.user2
+      temp.user = result.user2
     }
 
-    return { user: data.user }
+    return { user: temp.user }
   }, shallowEqual)
 
   // console.log('containers → common → header → [Header.js] → user: ', user)
