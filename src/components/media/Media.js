@@ -67,7 +67,7 @@ const Media = (props) => {
     <>
       <Styled.media className="group_media group_triple absorb">
         <div className="inner_triple first">
-          <Link to={{ pathname: `https://www.youtube.com/watch?v=${list[4].address}` }} target="_blank" className="link_media">
+          <Link to={{ pathname: `/beluga/video/read/${list[4].number}` }} className="link_media">
             <img src={`http://localhost:4000/uploads/${list[4].thumbnail}`} alt="" className="thumbnail_media" />
 
             <span className="information_media">
@@ -76,7 +76,7 @@ const Media = (props) => {
             </span>
           </Link>
 
-          <Link to={{ pathname: `https://www.youtube.com/watch?v=${list[3].address}` }} target="_blank" className="link_media">
+          <Link to={{ pathname: `/beluga/video/read/${list[3].number}` }} className="link_media">
             <img src={`http://localhost:4000/uploads/${list[3].thumbnail}`} alt="" className="thumbnail_media" />
 
             <span className="information_media">
@@ -87,7 +87,7 @@ const Media = (props) => {
         </div>
 
         <div className="inner_triple">
-          <Link to={{ pathname: `https://www.youtube.com/watch?v=${list[2].address}` }} target="_blank" className="link_media">
+          <Link to={{ pathname: `/beluga/video/read/${list[2].number}` }} className="link_media">
             <img src={`http://localhost:4000/uploads/${list[2].thumbnail}`} alt="" className="thumbnail_media" />
 
             <span className="information_media">
@@ -98,7 +98,7 @@ const Media = (props) => {
         </div>
 
         <div className="inner_triple last">
-          <Link to={{ pathname: `https://www.youtube.com/watch?v=${list[1].address}` }} target="_blank" className="link_media">
+          <Link to={{ pathname: `/beluga/video/read/${list[1].number}` }} className="link_media">
             <img src={`http://localhost:4000/uploads/${list[1].thumbnail}`} alt="" className="thumbnail_media" />
 
             <span className="information_media">
@@ -107,7 +107,7 @@ const Media = (props) => {
             </span>
           </Link>
 
-          <Link to={{ pathname: `https://www.youtube.com/watch?v=${list[0].address}` }} target="_blank" className="link_media">
+          <Link to={{ pathname: `/beluga/video/read/${list[0].number}` }} className="link_media">
             <img src={`http://localhost:4000/uploads/${list[0].thumbnail}`} alt="" className="thumbnail_media" />
 
             <span className="information_media">
