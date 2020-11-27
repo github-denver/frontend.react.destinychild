@@ -18,7 +18,7 @@ const Result = ({ location }) => {
       <Hero attribute={{ category: 'hero' }} />
 
       <section className="container">
-        <h2 className="invisible">데스티니 차일드 (Destiny Child) 본문 영역</h2>
+        <h2 className="invisible">본문 영역</h2>
 
         <div className="inner_global">
           <div className="contents absorb">
@@ -30,10 +30,14 @@ const Result = ({ location }) => {
               </div>
 
               <div className="inner_triple">
+                <Hgroup attribute={{ title: '업데이트', invisible: true }} />
+
                 <Update attribute={{ category: 'update' }} />
               </div>
 
               <div className="inner_triple">
+                <Hgroup attribute={{ title: '이벤트', invisible: true }} />
+
                 <Event attribute={{ category: 'event' }} />
               </div>
             </div>

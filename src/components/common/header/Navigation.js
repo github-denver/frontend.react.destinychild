@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Hgroup from '../../Hgroup'
 
 const Styled = {}
 
@@ -39,6 +40,8 @@ const Navigation = ({ attribute }) => {
 
   return (
     <>
+      <Hgroup attribute={{ title: '주메뉴', invisible: true }} />
+
       <Styled.navigation className="gnb">
         <ul className="list_gnb">
           <li>

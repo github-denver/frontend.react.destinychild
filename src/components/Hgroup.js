@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Styled = {}
 
+Styled.heading = styled.strong``
 Styled.hgroup = styled.div``
 
 const func = (category, navigation) => {
@@ -19,17 +20,25 @@ const func = (category, navigation) => {
   return result
 }
 
+const Heading = ({ level = 2, children }) => {
+  return (
+    <Styled.heading as={`h${level}`} className="title_hgroup">
+      {children}
+    </Styled.heading>
+  )
+}
+
 const Hgroup = ({ attribute }) => {
-  const { title, category, navigation } = attribute
+  const { level, title, invisible, category, navigation } = attribute
 
   const result = func(category, navigation)
 
   return (
     <>
-      <Styled.hgroup className="hgroup_global">
+      <Styled.hgroup className={invisible ? 'hgroup_global screen_out' : 'hgroup_global'}>
         <div className="group_half">
           <div className="inner_half">
-            <h3 className="title_hgroup">{title ? title : result}</h3>
+            <Heading level={level}>{title ? title : result}</Heading>
           </div>
           <div className="inner_half">
             {attribute.location && (
