@@ -24,19 +24,19 @@ const Result = ({ location }) => {
           <div className="contents absorb">
             <div className="group_triple">
               <div className="inner_triple">
-                <Hgroup attribute={{ title: '새소식' }} />
+                <Hgroup attribute={{ level: 3, title: '새소식' }} />
 
                 <Tab attribute={{ category: 'notice', location: location }} />
               </div>
 
               <div className="inner_triple">
-                <Hgroup attribute={{ title: '업데이트', invisible: true }} />
+                <Hgroup attribute={{ level: 3, title: '업데이트', invisible: true }} />
 
                 <Update attribute={{ category: 'update' }} />
               </div>
 
               <div className="inner_triple">
-                <Hgroup attribute={{ title: '이벤트', invisible: true }} />
+                <Hgroup attribute={{ level: 3, title: '이벤트', invisible: true }} />
 
                 <Event attribute={{ category: 'event' }} />
               </div>
@@ -47,7 +47,7 @@ const Result = ({ location }) => {
         {/* <div className="outer_contents"> */}
         <div className="contents">
           <div className="inner_global">
-            <Hgroup attribute={{ title: '게임 가이드' }} />
+            <Hgroup attribute={{ level: 3, title: '게임 가이드' }} />
 
             <Card attribute={{ category: 'guide', location: location }} />
           </div>
@@ -63,7 +63,7 @@ const Result = ({ location }) => {
         {/* <div className="outer_contents"> */}
         <div className="contents">
           <div className="inner_global">
-            <Hgroup attribute={{ title: '미디어' }} />
+            <Hgroup attribute={{ level: 3, title: '미디어' }} />
 
             <Media attribute={{ category: 'video' }} />
           </div>
