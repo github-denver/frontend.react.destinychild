@@ -114,7 +114,7 @@ const Result = ({ location, match }) => {
 
         <div className="inner_global">
           <div className="contents">
-            <Hgroup attribute={{ category: category, navigation: result }} />
+            <Hgroup attribute={{ level: 3, category: category, navigation: result }} />
 
             {category === 'notice' || category === 'talk' ? (
               <List attribute={{ category: category, location: location }} />

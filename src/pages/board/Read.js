@@ -119,7 +119,7 @@ const Result = ({ location, match }) => {
           <div className="contents read">
             <div className="group_half">
               <div className="inner_half">
-                <Hgroup attribute={{ category: category, navigation: result }} />
+                <Hgroup attribute={{ level: 3, category: category, navigation: result }} />
 
                 <Read attribute={{ category: category, location: location }} />
               </div>
