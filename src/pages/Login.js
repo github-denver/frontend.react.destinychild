@@ -8,7 +8,7 @@ const Result = () => {
       <Header attribute={{ minimal: true }} />
 
       <section className="minimal_container">
-        <h2 className="invisible">데스티니 차일드 (Destiny Child) 본문 영역</h2>
+        <h2 className="invisible">본문 영역</h2>
 
         <Login />
       </section>

@@ -113,7 +113,7 @@ const Result = ({ location, match }) => {
       <Visual attribute={{ category: 'hero', location: location }} />
 
       <section className="container">
-        <h2 className="invisible">데스티니 차일드 (Destiny Child) 본문 영역</h2>
+        <h2 className="invisible">본문 영역</h2>
 
         <div className="inner_global">
           <div className="contents read">

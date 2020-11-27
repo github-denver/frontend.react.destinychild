@@ -116,7 +116,7 @@ const Result = ({ location }) => {
       </header>
 
       <section className="container guide">
-        <h2 className="invisible">데스티니 차일드 (Destiny Child) 본문 영역</h2>
+        <h2 className="invisible">본문 영역</h2>
 
         <div className="inner_global">
           <div className="contents">

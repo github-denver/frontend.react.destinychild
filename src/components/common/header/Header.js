@@ -33,14 +33,14 @@ const Header = ({ attribute }) => {
         <h1 className="title_brand">
           <span className="outer_cell">
             <Link to="/beluga" className="link_brand inner_cell">
-              <span className="ir_wa">Beluga</span>
+              <span className="ir_wa">데스티니 차일드 (Destiny Child)</span>
             </Link>
             {minimal && (
               <>
                 <span className="text_collab">X</span>
                 <Link to={{ pathname: `http://cf24denver.cafe24app.com` }} className="link_collab" target="_blank">
                   덴버월드
-                </Link>{' '}
+                </Link>
               </>
             )}
           </span>
