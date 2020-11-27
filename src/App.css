@@ -464,11 +464,14 @@
 }
 
 .header .link_brand {
-  padding: 12px;
+  display: inline-block;
+  width: 193px;
+  height: 37px;
   font-size: 18px;
   color: #fff;
   background: url(/images/common/img_destiny_child.png) 0 50% no-repeat;
   background-size: 100% auto;
+  vertical-align: middle;
 }
 
 .gnb {
@@ -2071,7 +2074,8 @@ margin-top: 24px;
 }
 
 .minimal_header {
-  padding: 12px 0;
+  padding: 24px 0 12px;
+  font-size: 0;
   text-align: center;
 }
 
@@ -2080,19 +2084,29 @@ margin-top: 24px;
 }
 
 .minimal_header .title_brand {
-  display: inline-block;
-  width: 193px;
+  display: block;
   /* font-weight: normal; */
-  vertical-align: middle;
   text-align: center;
 }
 
 .minimal_header .link_brand {
-  padding: 12px;
+  display: inline-block;
+  width: 193px;
+  height: 37px;
   font-size: 18px;
   color: #fff;
   background: url(/images/common/img_destiny_child.png) 0 50% no-repeat;
   background-size: 100% auto;
+  vertical-align: middle;
+}
+
+.minimal_header .text_collab,
+.minimal_header .link_collab {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  vertical-align: middle;
 }
 
 .minimal_container {
@@ -2170,13 +2184,7 @@ margin-top: 24px;
 ---------- ---------- ---------- ---------- ---------- */
 .grp_collab {
   width: 360px;
-  margin: 0 auto 12px;
-}
-
-.grp_collab .title_collab {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
+  margin: 24px auto 12px;
 }
 
 .grp_collab .emphasis_collab {
