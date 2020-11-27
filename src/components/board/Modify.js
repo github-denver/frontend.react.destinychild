@@ -101,9 +101,7 @@ const Read = ({ attribute, actionButton }) => {
           <Field attribute={{ type: 'file', name: 'thumbnail', label: '대표 이미지', event: onChangeFile }} />
         </div>
       </div>
-      <hr />
-      <hr />
-      <hr />
+
       {actionButton}
     </Styled.read>
   )
