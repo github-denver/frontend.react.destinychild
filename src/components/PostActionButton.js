@@ -1,4 +1,3 @@
-// import React, { useState, useCallback } from 'react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -10,6 +9,7 @@ Styled.button = styled.div``
 
 const Button = ({ attribute }) => {
   const { category, edit, owner, remove } = attribute
+  // console.log('components → [PostActionButton.js] → attribute: ', attribute)
 
   const [modal, setModal] = useState(false)
 
