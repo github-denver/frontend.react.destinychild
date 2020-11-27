@@ -11,8 +11,6 @@ const BOARD_WRITE_INITIAL = 'board/BOARD_WRITE_INITIAL'
 
 const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST'
 
-const [BOARD_UPDATE, BOARD_UPDATE_SUCCESS, BOARD_UPDATE_FAILURE] = createRequestActionTypes('board/BOARD_UPDATE')
-
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
@@ -24,19 +22,17 @@ export const changeThumbnail = createAction(CHANGE_THUMBNAIL, ({ key, value }) =
 }))
 
 export const boardWrite = createAction(BOARD_WRITE, ({ category, payload }) => ({ category, payload }))
-export const boardUpdate = createAction(BOARD_UPDATE, ({ category, number, payload }) => ({ category, number, payload }))
 
 export const initialize = createAction(BOARD_WRITE_INITIAL)
 
 export const setOriginalPost = createAction(SET_ORIGINAL_POST, (post) => {
-  // console.log('modules → board → [modify.js] → setOriginalPost → post: ', post)
+  // console.log('modules → board → [write.js] → setOriginalPost → post: ', post)
 
   return post
 })
 
 export function* boardWriteSaga() {
   yield takeLatest(BOARD_WRITE, createRequestSaga(BOARD_WRITE, api.write))
-  yield takeLatest(BOARD_UPDATE, createRequestSaga(BOARD_UPDATE, api.update))
 }
 
 const initialState = {
@@ -63,6 +59,8 @@ export default handleActions(
       }
     },
     [BOARD_WRITE_INITIAL]: () => {
+      // console.log('BOARD_WRITE_INITIAL initialState: ', initialState)
+
       return {
         ...initialState
       }
@@ -90,18 +88,6 @@ export default handleActions(
         body: data.result[0].content,
         thumbnail: data.result[0].thumbnail,
         owner: data.result[0].id
-      }
-    },
-    [BOARD_UPDATE_SUCCESS]: (state, { payload: data }) => {
-      return {
-        ...state,
-        data
-      }
-    },
-    [BOARD_UPDATE_FAILURE]: (state, { payload: error }) => {
-      return {
-        ...state,
-        error
       }
     }
   },

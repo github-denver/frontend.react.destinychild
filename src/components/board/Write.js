@@ -1,3 +1,4 @@
+// import React, { useRef, useEffect, useState } from 'react'
 import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import Field from '../Field'
@@ -9,7 +10,9 @@ const Styled = {}
 Styled.read = styled.div``
 
 const Read = ({ attribute }) => {
-  const { title, body, field, upload } = attribute
+  // const [subject, setSubject] = useState('')
+
+  const { read, title, body, field, upload } = attribute
   // console.log('components → board → [Write.js] → attribute: ', attribute)
 
   const quillElement = useRef(null) // quill div element
@@ -37,12 +40,23 @@ const Read = ({ attribute }) => {
   const mounted = useRef(false)
 
   useEffect(() => {
-    if (mounted.current) return
+    // console.log('components → board → [Write.js] → mounted: ', mounted)
+    // console.log('components → board → [Write.js] → mounted.current: ', mounted.current)
+    // console.log('components → board → [Write.js] → read: ', read)
+    // console.log('components → board → [Write.js] → typeof read: ', typeof read)
+    // console.log('components → board → [Write.js] → body: ', body)
 
-    mounted.current = true
+    // console.log('components → board → [Write.js] → read && !mounted.current: ', read && !mounted.current)
+    if (read && !mounted.current) {
+      // console.log('components → board → [Write.js] → 통과하였습니다.')
 
-    quillInstance.current.root.innerHTML = body
-  }, [body])
+      mounted.current = true
+
+      // console.log("components → board → [Write.js] → read && typeof read !== 'undefined': ", read && typeof read !== 'undefined')
+
+      quillInstance.current.root.innerHTML = read && typeof read !== 'undefined' ? read.content : body
+    }
+  }, [body, read])
 
   const onChangeTitle = (event) => {
     field({ key: 'title', value: event.target.value })
@@ -78,11 +92,23 @@ const Read = ({ attribute }) => {
     }
   }
 
+  /* const onChange = (value) => {
+    // console.log('value: ', value)
+
+    setSubject(value)
+  } */
+
   return (
     <Styled.read className="group_read">
       <div className="read_header">
         <strong className="title_subject">
-          <Field attribute={{ type: 'text', name: 'subject', value: title, label: '제목', event: onChangeTitle }} />
+          {read && typeof read !== 'undefined' ? (
+            <Field attribute={{ type: 'text', name: 'subject', defaultValue: read.subject, value: title, label: '제목', event: onChangeTitle }} />
+          ) : (
+            <Field attribute={{ type: 'text', name: 'subject', label: '제목', event: onChangeTitle }} />
+          )}
+
+          {/* <input type="text" defaultValue={defaultValue} onChange={(event) => onChange(event.target.value)} />} */}
         </strong>
       </div>
 
