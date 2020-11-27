@@ -8,8 +8,14 @@ import qs from 'qs'
 const Result = (props) => {
   const { attribute } = props
 
-  const { list, pagination, error, loading } = useSelector(({ boardList, loading }) => {
+  const { user, list, pagination, error, loading } = useSelector(({ user, boardList, loading }) => {
     const temp = {}
+
+    if (user.user !== null) {
+      const result = typeof user.user === 'string' ? JSON.parse(user.user) : user.user
+
+      temp.user = result.user2
+    }
 
     if (boardList.data !== null) {
       temp.boardList = boardList.data.list
@@ -17,6 +23,7 @@ const Result = (props) => {
     }
 
     return {
+      user: temp.user,
       list: temp.boardList,
       pagination: temp.pagination,
       error: boardList.error,
@@ -62,6 +69,7 @@ const Result = (props) => {
 
   return (
     <List
+      user={user}
       select={prefixed.select}
       keyword={prefixed.keyword}
       category={attribute.category}

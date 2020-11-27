@@ -4,7 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { boardRead, boardReadInitial } from '../../modules/board/read'
 import { withRouter } from 'react-router-dom'
 import PostActionButton from '../../components/PostActionButton'
-import { setOriginalPost } from '../../modules/board/write'
+import { setOriginalPost } from '../../modules/board/modify'
 import { removePost } from '../../lib/api/read'
 
 const Result = (props) => {
@@ -64,7 +64,7 @@ const Result = (props) => {
 
     dispatch(setOriginalPost({ result: [read] }))
 
-    history.push(`/beluga/${attribute.category}/write/${read.number}`)
+    history.push(`/beluga/${attribute.category}/modify/${read.number}`)
   }
 
   const remove = async () => {

@@ -16,6 +16,7 @@ import ChildRead from './pages/child/Read'
 import BoardList from './pages/board/List'
 import BoardRead from './pages/board/Read'
 import BoardWrite from './pages/board/Write'
+import BoardModify from './pages/board/Modify'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route component={BoardList} path={['/beluga/:service/list', '/beluga/:service/list/:number']} />
       <Route component={BoardRead} path={['/beluga/:service/read', '/beluga/:service/read/:number']} />
       <Route component={BoardWrite} path={['/beluga/:service/write', '/beluga/:service/write/:number']} />
+      <Route component={BoardModify} path={['/beluga/:service/modify', '/beluga/:service/modify/:number']} />
 
       <Route component={GuideList} path={['/beluga/dictionary/book']} />
       <Route component={GuideRead} path={['/beluga/dictionary/detail/:number']} />

@@ -7,6 +7,7 @@ import updateList, { updateListSaga } from './banner/update'
 import boardList, { boardListSaga } from './board/list'
 import boardRead, { boardReadSaga } from './board/read'
 import boardWrite, { boardWriteSaga } from './board/write'
+import boardModify, { boardModifySaga } from './board/modify'
 
 import cardList, { cardListSaga } from './card/list'
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   boardList,
   boardRead,
   boardWrite,
+  boardModify,
   cardList,
   childList,
   childRead,
@@ -59,6 +61,7 @@ export function* rootSaga() {
     boardListSaga(),
     boardReadSaga(),
     boardWriteSaga(),
+    boardModifySaga(),
     cardListSaga(),
     childListSaga(),
     childReadSaga(),
