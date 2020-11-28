@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Hgroup from '../Hgroup'
 
 const $ = window.$
 
@@ -106,27 +107,31 @@ const Visual = (props) => {
   }
 
   return (
-    <Styled.visual className="group_visual">
-      <div className="inner_visual">
-        {visual.map((currentValue, index) => {
-          return (
-            <div className="box_visual" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }} key={currentValue.number}>
-              <Link to="/" className="link_visual">
-                <div className="information_visual">
-                  <div className="outer_cell">
-                    <div className="inner_cell">
-                      <span className="text_date" dangerouslySetInnerHTML={{ __html: currentValue.contents }}></span>
-                      <strong className="title_visual" dangerouslySetInnerHTML={{ __html: currentValue.subject }}></strong>
-                      <p className="description_visual" dangerouslySetInnerHTML={{ __html: currentValue.description }}></p>
+    <>
+      <Hgroup attribute={{ title: '히어로 영역', invisible: true }} />
+
+      <Styled.visual className="group_visual">
+        <div className="inner_visual">
+          {visual.map((currentValue, index) => {
+            return (
+              <div className="box_visual" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }} key={currentValue.number}>
+                <Link to="/" className="link_visual">
+                  <div className="information_visual">
+                    <div className="outer_cell">
+                      <div className="inner_cell">
+                        <span className="text_date" dangerouslySetInnerHTML={{ __html: currentValue.contents }}></span>
+                        <strong className="title_visual" dangerouslySetInnerHTML={{ __html: currentValue.subject }}></strong>
+                        <p className="description_visual" dangerouslySetInnerHTML={{ __html: currentValue.description }}></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          )
-        })}
-      </div>
-    </Styled.visual>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+      </Styled.visual>
+    </>
   )
 }
 

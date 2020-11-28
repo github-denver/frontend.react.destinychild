@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Hgroup from '../Hgroup'
 
 const $ = window.$
 
@@ -107,57 +108,61 @@ const Hero = (props) => {
   }
 
   return (
-    <Styled.hero className="group_hero">
-      <div className="inner_hero slick">
-        {hero.map((currentValue, index) => {
-          return (
-            <div className="box_hero" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }} key={currentValue.number}>
-              <Link to={currentValue.url} className="link_hero">
-                <div className="information_hero">
-                  <div className="outer_cell">
-                    <div className="inner_cell">
-                      <span className="text_date" dangerouslySetInnerHTML={{ __html: currentValue.contents }}></span>
-                      <strong className="title_hero" dangerouslySetInnerHTML={{ __html: currentValue.subject }}></strong>
-                      <p className="description_hero" dangerouslySetInnerHTML={{ __html: currentValue.description }}></p>
+    <>
+      <Hgroup attribute={{ title: '히어로 영역', invisible: true }} />
+
+      <Styled.hero className="group_hero">
+        <div className="inner_hero slick">
+          {hero.map((currentValue, index) => {
+            return (
+              <div className="box_hero" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }} key={currentValue.number}>
+                <Link to={currentValue.url} className="link_hero">
+                  <div className="information_hero">
+                    <div className="outer_cell">
+                      <div className="inner_cell">
+                        <span className="text_date" dangerouslySetInnerHTML={{ __html: currentValue.contents }}></span>
+                        <strong className="title_hero" dangerouslySetInnerHTML={{ __html: currentValue.subject }}></strong>
+                        <p className="description_hero" dangerouslySetInnerHTML={{ __html: currentValue.description }}></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          )
-        })}
-      </div>
-
-      <div className="hero_page">
-        <button type="button" className="button_page slick-prev">
-          <span>이전</span>
-        </button>
-        <button type="button" className="button_page slick-next">
-          <span>다음</span>
-        </button>
-      </div>
-
-      <div className="hero_indicator">
-        <div className="hero_indicator_page">
-          <em className="emphasis_page"></em>
-          <span className="text_slash">/</span>
-          <span className="text_total">{total}</span>
+                </Link>
+              </div>
+            )
+          })}
         </div>
 
-        <div className="hero_indicator_arrow">
-          <button type="button" className="button_indicator slick-prev">
-            이전
+        <div className="hero_page">
+          <button type="button" className="button_page slick-prev">
+            <span>이전</span>
           </button>
-          <button type="button" className="button_indicator slick-next">
-            다음
+          <button type="button" className="button_page slick-next">
+            <span>다음</span>
           </button>
         </div>
 
-        <Link to="/beluga/update/list" className="button_indicator button_detail">
-          더 보기
-        </Link>
-      </div>
-    </Styled.hero>
+        <div className="hero_indicator">
+          <div className="hero_indicator_page">
+            <em className="emphasis_page"></em>
+            <span className="text_slash">/</span>
+            <span className="text_total">{total}</span>
+          </div>
+
+          <div className="hero_indicator_arrow">
+            <button type="button" className="button_indicator slick-prev">
+              이전
+            </button>
+            <button type="button" className="button_indicator slick-next">
+              다음
+            </button>
+          </div>
+
+          <Link to="/beluga/update/list" className="button_indicator button_detail">
+            더 보기
+          </Link>
+        </div>
+      </Styled.hero>
+    </>
   )
 }
 
