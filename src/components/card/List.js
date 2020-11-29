@@ -66,7 +66,7 @@ const Loading = (props) => {
 }
 
 const Card = (props) => {
-  const { select, keyword, category, list, pagination, error, loading } = props
+  const { user, select, keyword, category, list, pagination, error, loading } = props
 
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -274,9 +274,11 @@ const Card = (props) => {
           <div className="group_button group_half">
             <div className="inner_half"></div>
             <div className="inner_half">
-              <Link to={`/beluga/${category}/write`} className="button_global button_default" role="button">
-                등록
-              </Link>
+              {user && typeof user !== 'undefined' && (
+                <Link to={`/beluga/${category}/write`} className="button_global button_default" role="button">
+                  등록
+                </Link>
+              )}
             </div>
           </div>
 
