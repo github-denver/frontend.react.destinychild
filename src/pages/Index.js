@@ -10,7 +10,9 @@ import Card from '../containers/card/List'
 import Media from '../containers/media/Media'
 import Footer from '../components/Footer'
 
-const Result = ({ location }) => {
+const Result = (props) => {
+  const { location } = props
+
   return (
     <>
       <Header />
