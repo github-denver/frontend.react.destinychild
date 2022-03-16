@@ -55,8 +55,6 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      // console.log('containers → [Register.js] → error: ', error)
-
       if (error.response.status === 400) {
         setMessage('이미 가입된 아이디입니다!')
 
@@ -67,18 +65,14 @@ const Register = ({ history }) => {
 
       return
     }
-    // console.log('containers → [Register.js] → authorization: ', authorization)
+
     if (authorization) {
-      // alert('회원가입에 성공했어요!')
-
-      // console.log('containers → [Register.js] → 회원가입에 성공했어요!')
-
+      // 회원가입 성공
       history.push('/beluga/member/login')
     }
 
     return () => {
-      // console.log('authorization/REGISTER_INITIAL 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // authorization/REGISTER_INITIAL 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(registerInitial())
     }
   }, [error, authorization, history, dispatch])

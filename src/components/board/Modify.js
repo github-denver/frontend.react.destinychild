@@ -13,7 +13,6 @@ const Read = ({ attribute, actionButton }) => {
   // const [subject, setSubject] = useState('')
 
   const { read, title, body, field, upload } = attribute
-  // console.log('components → board → [Modify.js] → attribute: ', attribute)
 
   const quillElement = useRef(null) // quill div element
   const quillInstance = useRef(null) // quill instance
@@ -38,7 +37,6 @@ const Read = ({ attribute, actionButton }) => {
   const mounted = useRef(false)
 
   useEffect(() => {
-    // console.log('components → board → [Modify.js] → read && !mounted.current: ', read && !mounted.current)
     if (read && !mounted.current) {
       mounted.current = true
 
@@ -63,12 +61,10 @@ const Read = ({ attribute, actionButton }) => {
       reader.readAsDataURL(event.target.files[0])
 
       files = event.target.files[0]
-      // console.log('components → board → [Modify.js] → files: ', files)
 
       // 읽은 후
       reader.onload = (event) => {
         result = event.target.result
-        // console.log('components → board → [Modify.js] → result: ', result)
 
         const formData = new FormData()
         formData.append('files', files)

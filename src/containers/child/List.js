@@ -19,7 +19,7 @@ const Result = (props) => {
       list: temp.childList,
       pagination: temp.pagination,
       error: childList.error,
-      loading: loading['child/CHILD_DICTIONARY_LIST']
+      loading: loading['child/DICTIONARY_LIST']
     }
   }, shallowEqual)
 
@@ -47,8 +47,7 @@ const Result = (props) => {
     dispatch(childList({ category: attribute.category, number }))
 
     return () => {
-      // console.log('child/CHILD_DICTIONARY_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // child/DICTIONARY_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(childListInitial())
     }
   }, [dispatch, attribute.location.pathname, attribute.category, number])

@@ -27,7 +27,7 @@ const Result = (props) => {
       list: temp.cardList,
       pagination: temp.pagination,
       error: cardList.error,
-      loading: loading['card/CARD_LIST']
+      loading: loading['card/LIST']
     }
   }, shallowEqual)
 
@@ -59,8 +59,7 @@ const Result = (props) => {
     dispatch(cardList({ category: attribute.category, number, select: prefixed.select, keyword: prefixed.keyword }))
 
     return () => {
-      // console.log('card/CARD_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // card/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(cardListInitial())
     }
   }, [dispatch, attribute.category, attribute.location.pathname, prefixed.select, prefixed.keyword, number])

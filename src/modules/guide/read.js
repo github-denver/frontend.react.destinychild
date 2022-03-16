@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/read'
 
-const [GUIDE_READ, GUIDE_SUCCESS, GUIDE_FAILURE] = createRequestActionTypes('guide/GUIDE_READ')
-const GUIDE_READ_INITIAL = 'guide/GUIDE_READ_INITIAL'
+const INITIAL = 'guide/READ/INITIAL'
+const READ = 'guide/READ'
+const SUCCESS = 'guide/READ/SUCCESS'
+const FAILURE = 'guide/READ/FAILURE'
 
-export const guideRead = createAction(GUIDE_READ, ({ category, number }) => ({ category, number }))
-export const guideReadInitial = createAction(GUIDE_READ_INITIAL)
+export const guideReadInitial = () => ({ type: INITIAL })
+export const guideRead = (payload) => ({ type: READ, payload })
 
 export function* guideReadSaga() {
-  yield takeLatest(GUIDE_READ, createRequestSaga(GUIDE_READ, api.read))
+  yield takeLatest(READ, createRequestSaga(READ, api.read))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [GUIDE_SUCCESS]: (state, { payload: data }) => {
+function guide(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [GUIDE_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [GUIDE_READ_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default guide

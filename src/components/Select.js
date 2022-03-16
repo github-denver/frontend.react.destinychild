@@ -7,7 +7,6 @@ Styled.select = styled.div``
 
 const Select = (props) => {
   const { attribute, onChange } = props
-  // console.log('components → [Select.js] → attribute: ', attribute)
 
   return (
     <>

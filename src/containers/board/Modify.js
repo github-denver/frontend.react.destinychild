@@ -12,10 +12,6 @@ const Result = (props) => {
   const [board, setBoard] = useState(false)
 
   const { user, read, owner, title, body, thumbnail } = useSelector(({ user, boardRead, boardModify }) => {
-    // console.log('containers → board → [Modify.js] → user: ', user)
-    // console.log('containers → board → [Modify.js] → boardRead: ', boardRead)
-    // console.log('containers → board → [Modify.js] → boardModify: ', boardModify)
-
     const temp = {}
 
     if (user.user !== null) {
@@ -41,7 +37,6 @@ const Result = (props) => {
       owner: temp.owner
     }
   }, shallowEqual)
-  // console.log('containers → board → [Modify.js] → read: ', read)
 
   const dispatch = useDispatch()
 
@@ -61,9 +56,6 @@ const Result = (props) => {
   const upload = useCallback((payload) => dispatch(changeThumbnail(payload)), [dispatch])
 
   useEffect(() => {
-    // console.log('containers → board → [Modify.js] → useEffect(() => { .. }')
-
-    // console.log('containers → board → [Modify.js] → useEffect(() => { .. } → !user: ', !user)
     if (!user) {
       history.push(`/beluga`)
     }
@@ -75,8 +67,7 @@ const Result = (props) => {
     }
 
     return () => {
-      // console.log('* board/BOARD_MODIFY 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // board/BOARD_MODIFY 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(initialize())
     }
   }, [attribute.category, board, dispatch, history, number, read, user])

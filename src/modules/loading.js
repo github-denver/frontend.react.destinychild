@@ -1,29 +1,39 @@
-import { createAction, handleActions } from 'redux-actions'
+const START = 'loading/START'
+const FINISH = 'loading/FINISH'
 
-const LOADING_START = 'loading/LOADING_START'
-const LOADING_FINISH = 'loading/LOADING_FINISH'
+export const loadingStart = (requestType) => {
+  return {
+    type: START,
+    requestType
+  }
+}
 
-export const loadingStart = createAction(LOADING_START, (request) => request)
-export const loadingFinish = createAction(LOADING_FINISH, (request) => request)
+export const loadingFinish = (requestType) => {
+  return {
+    type: FINISH,
+    requestType
+  }
+}
 
 const initialState = {}
 
-const loading = handleActions(
-  {
-    [LOADING_START]: (state, action) => {
+function loading(state = initialState, action) {
+  switch (action.type) {
+    case START:
       return {
         ...state,
         [action.payload]: true
       }
-    },
-    [LOADING_FINISH]: (state, action) => {
+
+    case FINISH:
       return {
         ...state,
         [action.payload]: false
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
 
 export default loading

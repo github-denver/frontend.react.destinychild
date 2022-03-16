@@ -54,7 +54,6 @@ const Banner = (props) => {
 
       return () => {
         if (!loading && !!banner) {
-          // console.log('components → banner → [Banner.js] → useEffect(() => { .. } → return () => { .. }')
           // $banner.slick('unslick')
         }
       }
@@ -63,33 +62,17 @@ const Banner = (props) => {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      // console.group('components → banner → [Banner.js]')
-      // console.log('존재하지 않는 데이터입니다.')
-      // console.groupEnd()
-
       return <p>존재하지 않는 데이터입니다.</p>
     }
-
-    // console.group('components → banner → [Banner.js]')
-    // console.log('에러가 발생했어요!')
-    // console.groupEnd()
 
     return <p>에러가 발생했어요!</p>
   }
 
   if (loading || !banner) {
-    // console.group('components → banner → [Banner.js]')
-    // console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
-    // console.groupEnd()
-
     return <Loading />
   }
 
   if (!banner) {
-    // console.group('components → banner → [Banner.js]')
-    // console.log('목록이 존재하지 않습니다.')
-    // console.groupEnd()
-
     return <p>목록이 존재하지 않습니다.</p>
   }
 
@@ -97,6 +80,7 @@ const Banner = (props) => {
     <>
       <Styled.banner className="group_banner">
         <div className="inner_banner slick">
+          {/* <div> */}
           {banner.map((currentValue, index) => {
             return (
               <div key={currentValue.number}>
@@ -106,6 +90,7 @@ const Banner = (props) => {
               </div>
             )
           })}
+          {/* </div> */}
         </div>
 
         <div className="banner_page">

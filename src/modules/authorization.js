@@ -1,31 +1,59 @@
-import { createAction, handleActions } from 'redux-actions'
 import produce from 'immer'
-import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga'
+import createRequestSaga from '../lib/createRequestSaga'
 import { takeLatest, call } from 'redux-saga/effects'
 import * as api from '../lib/api/authorization'
 import Cookies from 'js-cookie'
 
-const CHANGE_FIELD = 'authorization/CHANGE_FIELD'
-const INITIAL_FORM = 'authorization/INITIAL_FORM'
-const REGISTER_INITIAL = 'authorization/REGISTER_INITIAL'
+const FIELD = 'authorization/FIELD'
+const FORM_INITIAL = 'authorization/FORM/INITIAL'
 
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('authorization/LOGIN')
+const LOGIN = 'authorization/LOGIN'
+const LOGIN_SUCCESS = 'authorization/LOGIN/SUCCESS'
+const LOGIN_FAILURE = 'authorization/LOGIN/FAILURE'
 const LOGOUT = 'authorization/LOGOUT'
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes('authorization/REGISTER')
 
-export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => ({
-  form,
-  key,
-  value
-}))
+const REGISTER_INITIAL = 'authorization/REGISTER/INITIAL'
+const REGISTER = 'authorization/REGISTER'
+const REGISTER_SUCCESS = 'authorization/REGISTER/SUCCESS'
+const REGISTER_FAILURE = 'authorization/REGISTER/FAILURE'
 
-export const initializeForm = createAction(INITIAL_FORM, (form) => form)
+export const changeField = (payload) => {
+  return {
+    type: FIELD,
+    payload
+  }
+}
+export const initializeForm = (payload) => {
+  return {
+    type: FORM_INITIAL,
+    payload
+  }
+}
 
-export const registerInitial = createAction(REGISTER_INITIAL)
+export const login = (payload) => {
+  return {
+    type: LOGIN,
+    payload
+  }
+}
+export const signout = (payload) => {
+  return {
+    type: LOGOUT,
+    payload
+  }
+}
 
-export const login = createAction(LOGIN, ({ id, password }) => ({ id, password }))
-export const logout2 = createAction(LOGOUT)
-export const register = createAction(REGISTER, ({ id, name, password }) => ({ id, name, password }))
+export const register = (payload) => {
+  return {
+    type: REGISTER,
+    payload
+  }
+}
+export const registerInitial = () => {
+  return {
+    type: REGISTER_INITIAL
+  }
+}
 
 const loginSaga = createRequestSaga(LOGIN, api.login)
 const registerSaga = createRequestSaga(REGISTER, api.register)
@@ -37,8 +65,6 @@ function* logoutSaga() {
     localStorage.removeItem('user')
 
     Cookies.remove('accessToken')
-
-    // console.log("modules → [authorization.js] → localStorage.getItem('user'): ", localStorage.getItem('user'))
   } catch (error) {
     console.error(error)
   }
@@ -67,62 +93,63 @@ const initialState = {
   error: null
 }
 
-const authorization = handleActions(
-  {
-    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) => {
-      return produce(state, (draft) => {
-        draft[form][key] = value
-      })
-    },
-    [INITIAL_FORM]: (state, { payload: form }) => {
+function authorization(state = initialState, action) {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        [form]: initialState[form],
+        authorization: action.payload,
         error: null
       }
-    },
-    [LOGIN_SUCCESS]: (state, { payload: authorization }) => {
+
+    case LOGIN_FAILURE:
       return {
         ...state,
-        authorization,
-        error: null
+        error: action.payload
       }
-    },
-    [LOGIN_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error: error
-    }),
-    [LOGOUT]: (state, { payload: form }) => {
+
+    case LOGOUT:
       return {
         ...state,
-        [form]: initialState[form],
+        [action.payload.form]: initialState[action.payload.form],
         authorization: null,
         error: null
       }
-    },
-    [REGISTER_SUCCESS]: (state, { payload: authorization }) => {
-      // console.log('modules → [authorization.js] → [REGISTER_SUCCESS] → authorization: ', authorization)
 
+    case REGISTER_SUCCESS:
       return {
         ...state,
-        authorization,
+        authorization: action.payload,
         error: null
       }
-    },
-    [REGISTER_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error: error
-    }),
-    [REGISTER_INITIAL]: (state) => {
-      // console.log('modules → [authorization.js] → [REGISTER_INITIAL] → state: ', state)
 
+    case REGISTER_FAILURE:
       return {
         ...state,
+        error: action.payload
+      }
+
+    case REGISTER_INITIAL:
+      return {
+        ...initialState,
         authorization: null
       }
-    }
-  },
-  initialState
-)
+
+    case FIELD:
+      return produce(state, (draft) => {
+        draft[action.payload.form][action.payload.key] = action.payload.value
+      })
+
+    case FORM_INITIAL:
+      return {
+        ...state,
+        [action.payload.form]: initialState[action.payload.form],
+        error: null
+      }
+
+    default:
+      return state
+  }
+}
 
 export default authorization

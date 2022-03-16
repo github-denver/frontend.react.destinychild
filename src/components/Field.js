@@ -7,12 +7,6 @@ Styled.field = styled.div``
 
 const Part = (props) => {
   const { attribute, onChange } = props
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → attribute: ', attribute)
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → typeof attribute.type: ', typeof attribute.type)
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → typeof attribute.name: ', typeof attribute.name)
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → typeof attribute.id: ', typeof attribute.id)
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → typeof attribute.value: ', typeof attribute.value)
-  // console.log('components → [Field.js] → const Part = (props) => { .. } → typeof attribute.defaultValue: ', typeof attribute.defaultValue)
 
   return (
     <span className="box_field">
@@ -35,7 +29,6 @@ const Part = (props) => {
 
 const Field = (props) => {
   const { attribute, onChange } = props
-  // console.log('components → [Field.js] → attribute: ', attribute)
 
   return (
     <Styled.field className="group_field">

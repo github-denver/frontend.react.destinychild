@@ -9,7 +9,6 @@ Styled.button = styled.div``
 
 const Button = ({ attribute }) => {
   const { category, edit, owner, remove } = attribute
-  // console.log('components → [PostActionButton.js] → attribute: ', attribute)
 
   const [modal, setModal] = useState(false)
 

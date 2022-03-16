@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/tab'
 
-const [TAB_LIST, TAB_SUCCESS, TAB_FAILURE] = createRequestActionTypes('tab/TAB_LIST')
-const TAB_LIST_INITIAL = 'tab/TAB_LIST_INITIAL'
+const INITIAL = 'tab/LIST/INITIAL'
+const LIST = 'tab/LIST'
+const SUCCESS = 'tab/LIST/SUCCESS'
+const FAILURE = 'tab/LIST/FAILURE'
 
-export const tabList = createAction(TAB_LIST, ({ category, number }) => ({ category, number }))
-export const tabListInitial = createAction(TAB_LIST_INITIAL)
+export const tabListInitial = () => ({ type: INITIAL })
+export const tabList = (payload) => ({ type: LIST, payload })
 
 export function* tabListSaga() {
-  yield takeLatest(TAB_LIST, createRequestSaga(TAB_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [TAB_SUCCESS]: (state, { payload: data }) => {
+function tab(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [TAB_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [TAB_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default tab

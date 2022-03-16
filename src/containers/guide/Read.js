@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       read: temp.boardRead,
       error: boardRead.error,
-      loading: loading['board/BOARD_READ']
+      loading: loading['board/READ']
     }
   }, shallowEqual)
 
@@ -38,8 +38,7 @@ const Result = (props) => {
     dispatch(boardRead({ category: attribute.category, number }))
 
     return () => {
-      // console.log('board/BOARD_READ 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // board/READ 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(boardReadInitial())
     }
   }, [dispatch, attribute.location.pathname, attribute.category, number])

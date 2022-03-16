@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       list: temp.eventList,
       error: eventList.error,
-      loading: loading['event/EVENT_LIST']
+      loading: loading['event/LIST']
     }
   }, shallowEqual)
 
@@ -27,8 +27,7 @@ const Result = (props) => {
     dispatch(eventList({ category: attribute.category }))
 
     return () => {
-      // console.log('event/EVENT_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // event/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(eventListInitial())
     }
   }, [dispatch, attribute.category])

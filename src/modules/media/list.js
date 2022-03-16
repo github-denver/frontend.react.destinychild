@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/media'
 
-const [MEDIA_LIST, MEDIA_SUCCESS, MEDIA_FAILURE] = createRequestActionTypes('media/MEDIA_LIST')
-const MEDIA_LIST_INITIAL = 'media/MEDIA_LIST_INITIAL'
+const INITIAL = 'media/LIST/INITIAL'
+const LIST = 'media/LIST'
+const SUCCESS = 'media/LIST/SUCCESS'
+const FAILURE = 'media/LIST/FAILURE'
 
-export const mediaList = createAction(MEDIA_LIST, ({ category, number }) => ({ category, number }))
-export const mediaListInitial = createAction(MEDIA_LIST_INITIAL)
+export const mediaListInitial = () => ({ type: INITIAL })
+export const mediaList = (payload) => ({ type: LIST, payload })
 
 export function* mediaListSaga() {
-  yield takeLatest(MEDIA_LIST, createRequestSaga(MEDIA_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [MEDIA_SUCCESS]: (state, { payload: data }) => {
+function media(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [MEDIA_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [MEDIA_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default media

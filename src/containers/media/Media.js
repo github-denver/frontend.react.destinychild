@@ -19,7 +19,7 @@ const Result = (props) => {
       list: temp.mediaList,
       pagination: temp.pagination,
       error: mediaList.error,
-      loading: loading['media/MEDIA_LIST']
+      loading: loading['media/LIST']
     }
   }, shallowEqual)
 
@@ -29,8 +29,7 @@ const Result = (props) => {
     dispatch(mediaList({ category: attribute.category, number: 1 }))
 
     return () => {
-      // console.log('media/MEDIA_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // media/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(mediaListInitial())
     }
   }, [dispatch, attribute.category])

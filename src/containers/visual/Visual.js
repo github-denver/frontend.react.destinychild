@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       list: temp.visualList,
       error: visualList.error,
-      loading: loading['visual/VISUAL_LIST']
+      loading: loading['visual/LIST']
     }
   }, shallowEqual)
 
@@ -45,8 +45,7 @@ const Result = (props) => {
     dispatch(visualList({ category: attribute.category, number }))
 
     return () => {
-      // console.log('visual/VISUAL_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // visual/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(visualListInitial())
     }
   }, [dispatch, attribute.location.pathname, attribute.category, number])

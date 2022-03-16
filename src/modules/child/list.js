@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/child'
 
-const [CHILD_LIST, CHILD_SUCCESS, CHILD_FAILURE] = createRequestActionTypes('child/CHILD_LIST')
-const CHILD_LIST_INITIAL = 'child/CHILD_LIST_INITIAL'
+const INITIAL = 'child/LIST/INITIAL'
+const LIST = 'child/LIST'
+const SUCCESS = 'child/LIST/SUCCESS'
+const FAILURE = 'child/LIST/FAILURE'
 
-export const childList = createAction(CHILD_LIST, ({ category, number }) => ({ category, number }))
-export const childListInitial = createAction(CHILD_LIST_INITIAL)
+export const childListInitial = () => ({ type: INITIAL })
+export const childList = (payload) => ({ type: LIST, payload })
 
 export function* childListSaga() {
-  yield takeLatest(CHILD_LIST, createRequestSaga(CHILD_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [CHILD_SUCCESS]: (state, { payload: data }) => {
+function child(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [CHILD_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [CHILD_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default child

@@ -1,16 +1,26 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/read'
 
-const [BOARD_READ, BOARD_READ_SUCCESS, BOARD_READ_FAILURE] = createRequestActionTypes('board/BOARD_READ')
-const BOARD_READ_INITIAL = 'board/BOARD_READ_INITIAL'
+const INITIAL = 'board/READ/INITIAL'
+const READ = 'board/READ'
+const SUCCESS = 'board/READ/SUCCESS'
+const FAILURE = 'board/READ/FAILURE'
 
-export const boardRead = createAction(BOARD_READ, ({ category, number }) => ({ category, number }))
-export const boardReadInitial = createAction(BOARD_READ_INITIAL)
+export const boardReadInitial = () => {
+  return {
+    type: INITIAL
+  }
+}
+export const boardRead = (payload) => {
+  return {
+    type: READ,
+    payload
+  }
+}
 
 export function* boardReadSaga() {
-  yield takeLatest(BOARD_READ, createRequestSaga(BOARD_READ, api.read))
+  yield takeLatest(READ, createRequestSaga(READ, api.read))
 }
 
 const initialState = {
@@ -18,25 +28,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [BOARD_READ_SUCCESS]: (state, { payload: data }) => {
+function read(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [BOARD_READ_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [BOARD_READ_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default read

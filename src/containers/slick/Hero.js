@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       list: temp.heroList,
       error: heroList.error,
-      loading: loading['hero/HERO_LIST']
+      loading: loading['hero/LIST']
     }
   }, shallowEqual)
 
@@ -27,8 +27,7 @@ const Result = (props) => {
     dispatch(heroList({ category: attribute.category }))
 
     return () => {
-      // console.log('hero/HERO_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // hero/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(heroListInitial())
     }
   }, [dispatch, location.pathname, attribute.category])

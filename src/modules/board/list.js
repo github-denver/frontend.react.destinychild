@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/list'
 
-const [BOARD_LIST, BOARD_LIST_SUCCESS, BOARD_LIST_FAILURE] = createRequestActionTypes('board/BOARD_LIST')
-const BOARD_LIST_INITIAL = 'board/BOARD_LIST_INITIAL'
+const INITIAL = 'board/LIST/INITIAL'
+const LIST = 'board/LIST'
+const SUCCESS = 'board/LIST/SUCCESS'
+const FAILURE = 'board/LIST/FAILURE'
 
-export const boardList = createAction(BOARD_LIST, ({ category, number, select, keyword }) => ({ category, number, select, keyword }))
-export const boardListInitial = createAction(BOARD_LIST_INITIAL)
+export const boardListInitial = () => ({ type: INITIAL })
+export const boardList = (payload) => ({ type: LIST, payload })
 
 export function* boardListSaga() {
-  yield takeLatest(BOARD_LIST, createRequestSaga(BOARD_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [BOARD_LIST_SUCCESS]: (state, { payload: data }) => {
+function board(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [BOARD_LIST_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [BOARD_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default board

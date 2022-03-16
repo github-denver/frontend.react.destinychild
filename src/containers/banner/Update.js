@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       list: temp.updateList,
       error: updateList.error,
-      loading: loading['update/UPDATE_LIST']
+      loading: loading['update/LIST']
     }
   }, shallowEqual)
 
@@ -27,8 +27,7 @@ const Result = (props) => {
     dispatch(updateList({ category: attribute.category }))
 
     return () => {
-      // console.log('update/UPDATE_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // update/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(updateListInitial())
     }
   }, [dispatch, attribute.category])

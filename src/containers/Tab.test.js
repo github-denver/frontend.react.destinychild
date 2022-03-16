@@ -17,7 +17,7 @@ const Result = (props) => {
     return {
       tab: temp.tabList,
       error: tabList.error,
-      loading: loading['tab/TAB_LIST']
+      loading: loading['tab/LIST']
     }
   }, shallowEqual)
 
@@ -38,8 +38,7 @@ const Result = (props) => {
     dispatch(tabList({ category: attribute.category, number }))
 
     return () => {
-      // console.log('visual/VISUAL_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
-
+      // visual/LIST 언 마운트 될 때 리덕스에서 데이터를 삭제
       dispatch(tabListInitial())
     }
   }, [dispatch, attribute.location.pathname, attribute.category, number])

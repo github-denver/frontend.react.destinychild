@@ -1,38 +1,50 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/write'
 
-const CHANGE_FIELD = 'board/CHANGE_FIELD'
-const CHANGE_THUMBNAIL = 'board/CHANGE_THUMBNAIL'
+const FIELD = 'board/FIELD'
+const THUMBNAIL = 'board/THUMBNAIL'
 
-const [BOARD_WRITE, BOARD_WRITE_SUCCESS, BOARD_WRITE_FAILURE] = createRequestActionTypes('board/BOARD_WRITE')
-const BOARD_WRITE_INITIAL = 'board/BOARD_WRITE_INITIAL'
+const INITIAL = 'board/WRITE/INITIAL'
+const WRITE = 'board/WRITE'
+const SUCCESS = 'board/WRITE/SUCCESS'
+const FAILURE = 'board/WRITE/FAILURE'
 
-const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST'
+const ORIGINAL = 'board/WRITE/ORIGINAL'
 
-export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
-  key,
-  value
-}))
+export const setOriginalPost = (payload) => {
+  return {
+    type: ORIGINAL,
+    payload
+  }
+}
+export const changeField = (payload) => {
+  return {
+    type: FIELD,
+    payload
+  }
+}
+export const changeThumbnail = (payload) => {
+  return {
+    type: THUMBNAIL,
+    payload
+  }
+}
 
-export const changeThumbnail = createAction(CHANGE_THUMBNAIL, ({ key, value }) => ({
-  key,
-  value
-}))
-
-export const boardWrite = createAction(BOARD_WRITE, ({ category, payload }) => ({ category, payload }))
-
-export const initialize = createAction(BOARD_WRITE_INITIAL)
-
-export const setOriginalPost = createAction(SET_ORIGINAL_POST, (post) => {
-  // console.log('modules → board → [write.js] → setOriginalPost → post: ', post)
-
-  return post
-})
+export const initialize = () => {
+  return {
+    type: INITIAL
+  }
+}
+export const boardWrite = (payload) => {
+  return {
+    type: WRITE,
+    payload
+  }
+}
 
 export function* boardWriteSaga() {
-  yield takeLatest(BOARD_WRITE, createRequestSaga(BOARD_WRITE, api.write))
+  yield takeLatest(WRITE, createRequestSaga(WRITE, api.write))
 }
 
 const initialState = {
@@ -44,52 +56,51 @@ const initialState = {
   owner: null
 }
 
-export default handleActions(
-  {
-    [CHANGE_FIELD]: (state, { payload: { key, value } }) => {
+function write(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        [key]: value
+        data: action.payload
       }
-    },
-    [CHANGE_THUMBNAIL]: (state, { payload: { key, value } }) => {
-      return {
-        ...state,
-        [key]: value
-      }
-    },
-    [BOARD_WRITE_INITIAL]: () => {
-      // console.log('BOARD_WRITE_INITIAL initialState: ', initialState)
 
+    case FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+
+    case INITIAL:
       return {
         ...initialState
       }
-    },
-    [BOARD_WRITE_SUCCESS]: (state, { payload: data }) => {
-      // console.log('modules → board → [write.js] →  [BOARD_WRITE_SUCCESS] →  data: ', data)
+
+    case ORIGINAL:
+      const { title, body, thumbnail, owner } = action.payload.result[0]
 
       return {
         ...state,
-        data
+        title,
+        body,
+        thumbnail,
+        owner
       }
-    },
-    [BOARD_WRITE_FAILURE]: (state, { payload: error }) => {
-      return {
-        ...state,
-        error
-      }
-    },
-    [SET_ORIGINAL_POST]: (state, { payload: data }) => {
-      // console.log('modules → board → [write.js] →  [SET_ORIGINAL_POST] →  data: ', data)
 
+    case FIELD:
       return {
         ...state,
-        title: data.result[0].subject,
-        body: data.result[0].content,
-        thumbnail: data.result[0].thumbnail,
-        owner: data.result[0].id
+        [action.payload.key]: action.payload.value
       }
-    }
-  },
-  initialState
-)
+
+    case THUMBNAIL:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value
+      }
+
+    default:
+      return state
+  }
+}
+
+export default write

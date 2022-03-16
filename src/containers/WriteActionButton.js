@@ -24,8 +24,6 @@ const Result = (props) => {
   const number = location.pathname.split('/').splice(-1)[0]
 
   const publish = () => {
-    // console.log('containers → [WriteActionButton.js] → const publish = () => { .. } → owner: ', owner)
-
     const formData = new FormData()
     formData.append('category', attribute.category)
     formData.append('subject', title)
@@ -33,14 +31,10 @@ const Result = (props) => {
     formData.append('thumbnail', thumbnail)
 
     if (owner) {
-      // console.log('containers → [WriteActionButton.js] → const publish = () => { .. } → modify')
-
       dispatch(boardModify({ category: attribute.category, number: number, payload: formData }))
 
       history.push(`/beluga/${attribute.category}/read/${number}`)
     } else {
-      // console.log('containers → [WriteActionButton.js] → const publish = () => { .. } → write')
-
       dispatch(boardWrite({ category: attribute.category, payload: formData }))
     }
   }
@@ -50,16 +44,12 @@ const Result = (props) => {
   }
 
   useEffect(() => {
-    // console.log('containers → [WriteActionButton.js] → useEffect(() => { .. } → data: ', data)
-
     if (data) {
-      // console.log('containers → [WriteActionButton.js] → useEffect(() => { .. } → ', `/beluga/${data.service}/read/${data.number}`)
-
       history.push(`/beluga/${data.service}/read/${data.number}`)
     }
 
     if (error) {
-      // console.log('containers → [WriteActionButton.js] → useEffect(() => { .. } → error: ', error)
+      console.error(error)
     }
   }, [history, data, error])
 

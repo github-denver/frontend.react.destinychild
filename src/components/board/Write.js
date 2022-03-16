@@ -13,7 +13,6 @@ const Read = ({ attribute }) => {
   // const [subject, setSubject] = useState('')
 
   const { read, title, body, field, upload } = attribute
-  // console.log('components → board → [Write.js] → attribute: ', attribute)
 
   const quillElement = useRef(null) // quill div element
   const quillInstance = useRef(null) // quill instance
@@ -40,19 +39,8 @@ const Read = ({ attribute }) => {
   const mounted = useRef(false)
 
   useEffect(() => {
-    // console.log('components → board → [Write.js] → mounted: ', mounted)
-    // console.log('components → board → [Write.js] → mounted.current: ', mounted.current)
-    // console.log('components → board → [Write.js] → read: ', read)
-    // console.log('components → board → [Write.js] → typeof read: ', typeof read)
-    // console.log('components → board → [Write.js] → body: ', body)
-
-    // console.log('components → board → [Write.js] → read && !mounted.current: ', read && !mounted.current)
     if (read && !mounted.current) {
-      // console.log('components → board → [Write.js] → 통과하였습니다.')
-
       mounted.current = true
-
-      // console.log("components → board → [Write.js] → read && typeof read !== 'undefined': ", read && typeof read !== 'undefined')
 
       quillInstance.current.root.innerHTML = read && typeof read !== 'undefined' ? read.content : body
     }
@@ -75,12 +63,10 @@ const Read = ({ attribute }) => {
       reader.readAsDataURL(event.target.files[0])
 
       files = event.target.files[0]
-      // console.log('components → board → [Write.js] → files: ', files)
 
       // 읽은 후
       reader.onload = (event) => {
         result = event.target.result
-        // console.log('components → board → [Write.js] → result: ', result)
 
         const formData = new FormData()
         formData.append('files', files)
@@ -93,8 +79,6 @@ const Read = ({ attribute }) => {
   }
 
   /* const onChange = (value) => {
-    // console.log('value: ', value)
-
     setSubject(value)
   } */
 

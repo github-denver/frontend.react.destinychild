@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/hero'
 
-const [VISUAL_LIST, VISUAL_SUCCESS, VISUAL_FAILURE] = createRequestActionTypes('visual/VISUAL_LIST')
-const VISUAL_LIST_INITIAL = 'visual/VISUAL_LIST_INITIAL'
+const INITIAL = 'visual/LIST/INITIAL'
+const LIST = 'visual/LIST'
+const SUCCESS = 'visual/LIST/SUCCESS'
+const FAILURE = 'visual/LIST/FAILURE'
 
-export const visualList = createAction(VISUAL_LIST, ({ category, number }) => ({ category, number }))
-export const visualListInitial = createAction(VISUAL_LIST_INITIAL)
+export const visualListInitial = () => ({ type: INITIAL })
+export const visualList = (payload) => ({ type: LIST, payload })
 
 export function* visualListSaga() {
-  yield takeLatest(VISUAL_LIST, createRequestSaga(VISUAL_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [VISUAL_SUCCESS]: (state, { payload: data }) => {
+function visual(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [VISUAL_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [VISUAL_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default visual

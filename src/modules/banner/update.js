@@ -1,16 +1,17 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga'
+import createRequestSaga from '../../lib/createRequestSaga'
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '../../lib/api/banner'
 
-const [UPDATE_LIST, UPDATE_SUCCESS, UPDATE_FAILURE] = createRequestActionTypes('update/UPDATE_LIST')
-const UPDATE_LIST_INITIAL = 'update/UPDATE_LIST_INITIAL'
+const INITIAL = 'update/LIST/INITIAL'
+const LIST = 'update/LIST'
+const SUCCESS = 'update/LIST/SUCCESS'
+const FAILURE = 'update/LIST/FAILURE'
 
-export const updateList = createAction(UPDATE_LIST, ({ category, number }) => ({ category, number }))
-export const updateListInitial = createAction(UPDATE_LIST_INITIAL)
+export const updateListInitial = () => ({ type: INITIAL })
+export const updateList = (category) => ({ type: LIST, payload: category })
 
 export function* updateListSaga() {
-  yield takeLatest(UPDATE_LIST, createRequestSaga(UPDATE_LIST, api.list))
+  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 
 const initialState = {
@@ -18,25 +19,28 @@ const initialState = {
   error: null
 }
 
-export default handleActions(
-  {
-    [UPDATE_SUCCESS]: (state, { payload: data }) => {
+function update(state = initialState, action) {
+  switch (action.type) {
+    case SUCCESS:
       return {
         ...state,
-        data
+        data: action.payload
       }
-    },
-    [UPDATE_FAILURE]: (state, { payload: error }) => {
+
+    case FAILURE:
       return {
         ...state,
-        error
+        error: action.payload
       }
-    },
-    [UPDATE_LIST_INITIAL]: () => {
+
+    case INITIAL:
       return {
         ...initialState
       }
-    }
-  },
-  initialState
-)
+
+    default:
+      return state
+  }
+}
+
+export default update
