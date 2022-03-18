@@ -11,23 +11,33 @@ import * as api from '../../lib/api/banner'
   Action은 반드시 type을 가지고 있어야 하고 이외 값은 상황에 따라 넣을 수 있습니다.
   type은 어떤 동작을 할 것인지 표기한 명령어입니다.
 */
-const INITIAL = 'update/LIST/INITIAL'
-const LIST = 'update/LIST'
-const SUCCESS = 'update/LIST/SUCCESS'
-const FAILURE = 'update/LIST/FAILURE'
+const INITIAL = 'event/LIST/INITIAL'
+const LIST = 'event/LIST'
+const SUCCESS = 'event/LIST/SUCCESS'
+const FAILURE = 'event/LIST/FAILURE'
 
 // Action Creator
 /*
   Action이 동작에 대해 선언된 객체라면 Action Creator는 Action을 생성해서 실제 객체로 만들어주는 함수입니다.
 */
-export const updateListInitial = createAction(INITIAL)
-export const updateList = createAction(LIST, ({ category }) => ({ category }))
+export const eventListInitial = createAction(INITIAL)
+export const eventList = createAction(LIST, ({ category }) => ({ category }))
 
 // Main Saga
 /*
   put은 dispatch입니다.
 */
-export function* updateListSaga() {
+export function* eventListSaga() {
+  /*
+    takeLatest는 내부에 선언한 Saga를 항상 실행시켜놓는데, Action 객체를 수시로 확인하고 있다가 해당 객체가 생성되면 행동을 취합니다.
+
+    예를 들어, LIST Action 객체가 생성되면 createRequestSaga를 수행합니다.
+    LIST Action 객체가 생성됐다면 createRequestSaga를 수행하는 데 api.list를 호출합니다.
+    호출 후 api.list의 데이터를 response 변수에 할당합니다.
+
+    그리고 response를 SUCCESS, FAILURE(Action Creator)에 put(Dispatch) 합니다.
+    이때, SUCCESS, FAILURE라는 Action 객체가 생성되는데 eventListSaga()를 보면 SUCCESS, FAILURE라는 Action 객체에 대한 행동이 없기 때문에 곧바로 Reducer로 이동합니다.
+  */
   yield takeLatest(LIST, createRequestSaga(LIST, api.list))
 }
 

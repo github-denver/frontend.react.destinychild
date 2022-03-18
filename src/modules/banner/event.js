@@ -1,46 +1,79 @@
-import createRequestSaga from '../../lib/createRequestSaga'
+import createPromiseSaga from '../../lib/createRequestSaga'
+import { reducerUtils, handleAsyncAction } from '../../lib/asyncUtils'
 import { takeLatest } from 'redux-saga/effects'
+import { createSlice } from '@reduxjs/toolkit'
 import * as api from '../../lib/api/banner'
 
-const INITIAL = 'event/LIST/INITIAL'
-const LIST = 'event/LIST'
-const SUCCESS = 'event/LIST/SUCCESS'
-const FAILURE = 'event/LIST/FAILURE'
+// Action Type
+const prefix = 'event'
 
-export const eventListInitial = () => ({ type: INITIAL })
-export const eventList = (category) => ({ type: LIST, payload: category })
+export const [postsState, postState] = [prefix, 'post']
 
-export function* eventListSaga() {
-  yield takeLatest(LIST, createRequestSaga(LIST, api.list))
-}
+// Action Creator
 
+// State
 const initialState = {
-  data: null,
-  error: null
+  data: reducerUtils.initial(),
+  error: reducerUtils.initial(),
+  loading: reducerUtils.initial(),
+  post: reducerUtils.initial()
 }
 
-function event(state = initialState, action) {
-  switch (action.type) {
-    case SUCCESS:
-      return {
-        ...state,
-        data: action.payload
-      }
-
-    case FAILURE:
-      return {
-        ...state,
-        error: action.payload
-      }
-
-    case INITIAL:
+/* Reducer */
+const eventListReducer = createSlice({
+  name: prefix,
+  initialState,
+  reducers: {
+    eventListInitial: (state, action) => {
       return {
         ...initialState
       }
+    },
+    eventList: (state, action) => {
+      return {
+        category: action.payload
+      }
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      (action) => {
+        console.group('extraReducers: (builder) => { .. } → (action) => { .. }')
+        console.log('action: ', action)
+        console.log('action.type: ', action.type)
+        console.groupEnd()
 
-    default:
-      return state
+        return action.type.includes(prefix)
+      },
+      (state, action) => {
+        // state.data = handleAsyncAction(action)
+
+        console.group('extraReducers: (builder) => { .. } → (state, action) => { .. }')
+        console.log('state: ', state)
+        console.log(`state[${action.payload.stateType}]: `, state[action.payload.stateType])
+        console.log('action: ', action)
+        console.groupEnd()
+
+        if (typeof state[action.payload.stateType] !== 'undefined') {
+          state[action.payload.stateType] = handleAsyncAction(action)
+        } else {
+          state.data = handleAsyncAction(action)
+        }
+      }
+    )
   }
+})
+
+// Success, Failure, Initial, Action을 외부에서 Dispatch 할 수 있도록 export 합니다.
+export const { eventListInitial, eventList } = eventListReducer.actions
+
+// Main Saga
+export function* eventListSaga() {
+  console.group('export function* eventListSaga() { .. }')
+  console.groupEnd()
+
+  yield takeLatest(eventList, createPromiseSaga(eventList, api.list, 'post'))
 }
 
-export default event
+// Reducer export
+export default eventListReducer.reducer

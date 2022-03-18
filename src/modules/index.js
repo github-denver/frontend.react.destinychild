@@ -31,6 +31,7 @@ import authorization, { authorizationSaga } from './authorization'
 
 import user, { userSaga } from './user'
 
+// combineReducers를 사용해서 병합
 const rootReducer = combineReducers({
   loading,
   authorization,
@@ -53,6 +54,8 @@ const rootReducer = combineReducers({
 })
 
 export function* rootSaga() {
+  // yield는 비동기 작업을 처리할 때 작업 단위를 나누는 기준점 같은 것으로 보면 된다.
+  // all 은 여러 개의 Saga를 동시에 실행시켜준다.
   yield all([
     authorizationSaga(),
     userSaga(),

@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime'
 import 'react-app-polyfill/ie9'
 import 'react-app-polyfill/ie11'
 import 'react-app-polyfill/stable'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -10,32 +11,32 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore, compose, applyMiddleware } from 'redux'
+/* import { createStore, compose, applyMiddleware } from 'redux' */
 // import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer, { rootSaga } from './modules'
 import createSagaMiddleware from 'redux-saga'
+import { configureStore } from '@reduxjs/toolkit'
+
 import { tempSetUser, check } from './modules/user'
 import Cookies from 'js-cookie'
 
-const sagaMiddleware = createSagaMiddleware()
-
-const middlewares = [sagaMiddleware]
-
 /*
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && process.env.NODE_ENV !== 'production'
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-      })
-    : compose
-*/
-
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
   }
 }
+*/
 
+/*
+const sagaMiddleware = createSagaMiddleware()
+
+const middlewares = [sagaMiddleware]
+*/
+
+// const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && process.env.NODE_ENV !== 'production' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize... }) : compose
+
+/*
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && process.env.NODE_ENV !== 'production'
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -47,8 +48,22 @@ const enhancer = composeEnhancers(
   // other store enhancers if any
 )
 
-// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 const store = createStore(rootReducer, enhancer)
+*/
+
+// Saga Middleware 생성
+const sagaMiddleware = createSagaMiddleware()
+
+// Store 만들 때 Saga Middleware
+// const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+// Store 만들 때 Saga Middleware + Redux DevTools
+// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+const store = configureStore({ reducer: rootReducer, middleware: [sagaMiddleware] })
+
+// Saga 실행
+sagaMiddleware.run(rootSaga)
 
 function user() {
   try {
@@ -63,8 +78,6 @@ function user() {
     console.error(error)
   }
 }
-
-sagaMiddleware.run(rootSaga)
 
 user()
 
