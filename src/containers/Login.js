@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { changeField, initializeForm, login } from '../modules/authorization'
 import Form from '../components/authorization/Form'
 import { check } from '../modules/user'
@@ -26,7 +26,7 @@ const Login = ({ history }) => {
       error: authorization.error,
       user: data.user
     }
-  })
+  }, shallowEqual)
 
   const dispatch = useDispatch()
 
