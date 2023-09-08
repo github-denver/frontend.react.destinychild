@@ -32,6 +32,11 @@ const Result = (props) => {
     formData.append('content', body)
     formData.append('thumbnail', thumbnail)
 
+    for (let i = 0; i < thumbnail.length; i++) {
+      console.log(thumbnail[i])
+      // formData.append(`thumbnail`, thumbnail[i])
+    }
+
     if (owner) {
       // console.log('containers → [WriteActionButton.js] → const publish = () => { .. } → modify')
 
