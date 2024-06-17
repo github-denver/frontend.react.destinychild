@@ -97,7 +97,7 @@ const Card = (props) => {
                   {category === 'update' && (
                     <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_card">
                       <span className="frame_card">
-                        <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                        <span className="thumbnail_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                       </span>
 
                       <span className="information_card">
@@ -111,7 +111,7 @@ const Card = (props) => {
                   {category === 'event' && (
                     <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_card">
                       <span className="frame_card">
-                        <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                        <span className="thumbnail_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                       </span>
 
                       <span className="information_card">
@@ -127,7 +127,9 @@ const Card = (props) => {
                       {index === 0 && (
                         <Link to={`/beluga/dictionary/detail/4`} className="link_card" target="_blank">
                           <span className="frame_card">
-                            <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                            <span
+                              className="thumbnail_card"
+                              style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                           </span>
 
                           <span className="information_card">
@@ -145,7 +147,9 @@ const Card = (props) => {
                       {index === 1 && (
                         <Link to={`/beluga/dictionary/detail/3`} className="link_card" target="_blank">
                           <span className="frame_card">
-                            <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                            <span
+                              className="thumbnail_card"
+                              style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                           </span>
 
                           <span className="information_card">
@@ -163,7 +167,9 @@ const Card = (props) => {
                       {index === 2 && (
                         <Link to={`/beluga/dictionary/detail/11`} className="link_card" target="_blank">
                           <span className="frame_card">
-                            <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                            <span
+                              className="thumbnail_card"
+                              style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                           </span>
 
                           <span className="information_card">
@@ -182,7 +188,7 @@ const Card = (props) => {
 
                   {category === 'child' && (
                     <Link to={`/beluga/${category}/detail/${currentValue.number}`} className="link_card" target="_blank">
-                      <span className="frame_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.portrait})` }}></span>
+                      <span className="frame_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.portrait}')` }}></span>
 
                       <span className="information_card">
                         <strong className="text_card">{currentValue.subject}</strong>
@@ -195,7 +201,7 @@ const Card = (props) => {
                   {category === 'gallery' && (
                     <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_card">
                       <span className="frame_card">
-                        <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                        <span className="thumbnail_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                       </span>
 
                       <span className="information_card">
@@ -215,7 +221,7 @@ const Card = (props) => {
                   {category === 'video' && (
                     <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_card">
                       <span className="frame_card">
-                        <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                        <span className="thumbnail_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                       </span>
 
                       <span className="information_card">
@@ -233,7 +239,7 @@ const Card = (props) => {
                   {category === 'music' && (
                     <Link to={`/beluga/${category}/read/${currentValue.number}`} className="link_card">
                       <span className="frame_card">
-                        <span className="thumbnail_card" style={{ backgroundImage: `url(http://localhost:4000/uploads/${currentValue.thumbnail})` }}></span>
+                        <span className="thumbnail_card" style={{ backgroundImage: `url('http://localhost:4000/uploads/${currentValue.thumbnail}')` }}></span>
                       </span>
 
                       <span className="information_card">

@@ -78,6 +78,34 @@ const Read = ({ attribute }) => {
     }
   }
 
+  /***
+  const onChangeFile = (event) => {
+    let files = event.target.files
+    let file = null
+    let paths = []
+
+    const formData = new FormData()
+
+    for (let i = 0; i < files.length; i++) {
+      file = files[i]
+
+      formData.append(`files${i}`, file)
+
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+
+      reader.onload = () => {
+        paths[i] = reader.result
+
+        formData.append(`paths${i}`, paths[i])
+      }
+    }
+
+    console.log('files: ', files)
+    upload({ key: 'thumbnail', value: files })
+  }
+  ***/
+
   /* const onChange = (value) => {
     setSubject(value)
   } */
